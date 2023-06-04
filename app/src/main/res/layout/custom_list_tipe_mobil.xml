@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/model_mobil"
+        android:layout_width="wrap_content"
+        android:text="Avanza"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="#000000"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:id="@+id/merk_mobil"
+        android:layout_below="@+id/model_mobil"
+        android:text="Toyota"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:id="@+id/kapasitas_mesin_mobil"
+        android:layout_below="@+id/model_mobil"
+        android:layout_toRightOf="@id/transmisi_mobil"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:text="1.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tahun_mobil"
+        android:layout_below="@+id/model_mobil"
+        android:layout_toRightOf="@id/merk_mobil"
+        android:text="2021"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tipe_mobil"
+        android:layout_toRightOf="@id/model_mobil"
+        android:textSize="22sp"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        android:text="E"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:id="@+id/transmisi_mobil"
+        android:layout_below="@+id/model_mobil"
+        android:layout_toRightOf="@id/tahun_mobil"
+        android:text="Manual"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_navigate_next_24"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        app:tint="#000000">
+    </ImageView>
+
+</RelativeLayout>

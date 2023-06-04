@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/icon_backToHome"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:tint="#000000"/>
+        <TextView
+            android:id="@+id/txtJudul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add data"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"/>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_below="@id/header_layout"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/photo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="255dp"
+                android:background="#fffde7">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgTambahFoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_add_a_photo_24"
+                        app:tint="#c17900"/>
+
+                    <TextView
+                        android:id="@+id/txtTambahkanFotoMobil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tambahkan foto Mobil"
+                        android:layout_below="@+id/imgTambahFoto"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#c17900"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDetailMobil"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgDetailMobil"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_baseline_directions_car_24"
+                        android:layout_centerVertical="true"
+                        app:tint="#c17900"/>
+                    <TextView
+                        android:id="@+id/txtDetailMobil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@android:color/primary_text_light_nodisable"
+                        android:text="Detail Mobil"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_toRightOf="@+id/imgDetailMobil"
+                        android:padding="10dp"/>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBerkas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgBerkas"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/copy"
+                        android:layout_centerVertical="true"
+                        app:tint="#c17900"/>
+                    <TextView
+                        android:id="@+id/txtBerkas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@android:color/primary_text_light_nodisable"
+                        android:text="Kelengkapan Berkas"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_toRightOf="@+id/imgBerkas"
+                        android:padding="10dp"/>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardHarga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputTextHarga"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Harga"
+                            android:text=""
+                            android:drawableLeft="@drawable/money"
+                            android:drawablePadding="15dp"
+                            android:drawableTint="#c17900"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardJarakTempuh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp"
+                android:layout_below="@+id/cardHarga"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputTextJarakTempuh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/dashboard"
+                            android:drawablePadding="15dp"
+                            android:hint="Jarak Tempuh"
+                            android:text=""
+                            android:textAlignment="viewEnd"
+                            android:drawableTint="#c17900"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardKeterangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp"
+                android:layout_below="@+id/cardJarakTempuh"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputKeterangan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_baseline_chat_24"
+                            android:drawablePadding="15dp"
+                            android:hint="Keterangan"
+                            android:textAlignment="viewEnd"
+                            android:drawableTint="#c17900"/>
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardKondisiMesin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                android:layout_below="@+id/cardKeterangan"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgKondisiMesin"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/conveyor"
+                        android:layout_centerVertical="true"
+                        app:tint="#c17900"/>
+                    <TextView
+                        android:id="@+id/txtKondisiMesin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@android:color/primary_text_light_nodisable"
+                        android:text="Kondisi Mesin"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_toRightOf="@+id/imgKondisiMesin"
+                        android:padding="10dp"/>
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardKondisiFisik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                android:layout_below="@+id/cardKondisiMesin"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgKondisiFisik"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/sedan"
+                        android:layout_centerVertical="true"
+                        app:tint="#c17900"/>
+                    <TextView
+                        android:id="@+id/txtKondisiFisik"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@android:color/primary_text_light_nodisable"
+                        android:text="Kondisi Fisik"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_toRightOf="@+id/imgKondisiFisik"
+                        android:padding="10dp"/>
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardKondisiUndersteel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                android:layout_below="@+id/cardKondisiFisik"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgKondisiUndersteel"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/shockbreaker"
+                        android:layout_centerVertical="true"
+                        app:tint="#c17900"/>
+                    <TextView
+                        android:id="@+id/txtKondisiUndersteel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+                        android:drawableTint="@android:color/primary_text_light_nodisable"
+                        android:text="Kondisi Understeel"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_toRightOf="@+id/imgKondisiUndersteel"
+                        android:padding="10dp"/>
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</RelativeLayout>

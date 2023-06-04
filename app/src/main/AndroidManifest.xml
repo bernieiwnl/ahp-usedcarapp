@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tugas_akhir">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".REKOMENDASI.RekomendasiAlternatifActivity"
+            android:exported="true" />
+        <activity
+            android:name=".REKOMENDASI.DaftarAlternatifActivity"
+            android:exported="true" />
+        <activity
+            android:name=".REKOMENDASI.PemilihanAlternatifActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PREFERENSI.PreferensiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PREFERENSI.ListKriteriaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PREFERENSI.UbahKriteriaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PREFERENSI.KriteriaActivity"
+            android:exported="true" />
+        <activity android:name=".MASTER.DetailMobilUserActivity" />
+        <activity android:name=".MASTER.UpdateKelengkapanBerkasPajakActivity" />
+        <activity android:name=".MASTER.UpdateDaftarMobilActivity" />
+        <activity android:name=".ADDATA_MOBIL.AddDetailMobilActivity" />
+        <activity android:name=".ADDATA_MOBIL.KelengkapanBerkas_PajakActivity" />
+        <activity android:name=".MASTER.DetailMobilActivity" />
+        <activity android:name=".MASTER.UpdateKondisiUndersteelActivity" />
+        <activity android:name=".MASTER.UpdateKondisiFisikActivity" />
+        <activity android:name=".MASTER.UpdateKondisiMesinActivity" />
+        <activity android:name=".ADDATA_MOBIL.KondisiUnderSteelActivity" />
+        <activity android:name=".ADDATA_MOBIL.KondisiFisikActivity" />
+        <activity android:name=".ADDATA_MOBIL.KondisiMesinActivity" />
+        <activity android:name=".ADDATA_MOBIL.VarianMobilActivity" />
+        <activity android:name=".ADDATA_MOBIL.TipeMobilActivity" />
+        <activity android:name=".ADDATA_MOBIL.MerkMobilActivity" />
+        <activity android:name=".ADDATA_MOBIL.TahunMobilActivity" />
+        <activity android:name=".ADDATA_MOBIL.AddDataMobilActivity" />
+        <activity android:name=".PROFILE.DaftarMobilUserActivity" />
+        <activity android:name=".PROFILE.UbahProfileActivity" />
+        <activity android:name=".HOME.HomeActivity" />
+        <activity android:name=".REGISTER.RegisterActivity" />
+        <activity android:name=".LOGIN.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

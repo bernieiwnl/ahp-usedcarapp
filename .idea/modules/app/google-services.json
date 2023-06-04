@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "695493807511",
+    "project_id": "tugas-akhir-2021-f8bbf",
+    "storage_bucket": "tugas-akhir-2021-f8bbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695493807511:android:7538f172612f6a1ae008d2",
+        "android_client_info": {
+          "package_name": "com.example.tugas_akhir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695493807511-geecm4d7hg6i8dahk5n0if84jludj5ro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tugas_akhir",
+            "certificate_hash": "a175367a2b8ba93e88ce2f33e760feb793e23768"
+          }
+        },
+        {
+          "client_id": "695493807511-f32vai16fl0ro9qg0ff8i3deq7t8ih92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-MqQm-R323yGWofoQVYlYweAhoZw5Sbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695493807511-f32vai16fl0ro9qg0ff8i3deq7t8ih92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

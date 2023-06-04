@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MASTER.DetailMobilActivity"
+    android:background="#ffd95a">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/icon_backToHome"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                app:tint="#FFFFFF"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/imgSliderMobil"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardJudulMobil"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="402dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtJudul"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Judul Mobil"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtHarga"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Harga"
+                        android:layout_below="@+id/txtJudul"
+                        android:textSize="18sp"
+                        android:padding="10dp"
+                        android:textColor="@color/colorButton"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"/>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewBerkas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="402dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtKelengkapanBerkas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kelengkapan Berkas"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/copy"
+                        android:drawableTint="@color/colorIcon"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtPajakMobil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Pajak"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/financial"
+                        android:drawableTint="@color/colorIcon"
+                        android:drawablePadding="10dp"
+                        android:layout_below="@id/txtKelengkapanBerkas"/>
+
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewDeskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_custom_backgorund_sheet"
+            app:cardElevation="10dp"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="402dp"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtTransmisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Transmisi"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:drawableLeft="@drawable/transmision"
+                    android:drawableTint="@color/colorIcon"
+                    android:drawablePadding="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgKilometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dashboard"
+                    app:tint="@color/colorIcon"
+                    android:layout_marginLeft="200dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/txtKilometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Kilometer"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@+id/imgKilometer"
+                    android:layout_marginLeft="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgKapasitasMesin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/motor"
+                    app:tint="@color/colorIcon"
+                    android:layout_marginLeft="200dp"
+                    android:layout_marginTop="55dp"/>
+
+                <TextView
+                    android:id="@+id/txtKapasitasMesin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Kapasitas Mesin"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:drawablePadding="10dp"
+                    android:layout_toRightOf="@+id/imgKapasitasMesin"
+                    android:layout_below="@+id/txtKilometer"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/txtTahun"
+                    android:layout_below="@+id/txtTransmisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Tahun"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:drawableLeft="@drawable/calendar"
+
+                    android:drawableTint="@color/colorIcon"
+                    android:drawablePadding="10dp"/>
+
+                <TextView
+                    android:id="@+id/txtService"
+                    android:layout_below="@+id/txtTahun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Service Record"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:drawableLeft="@drawable/servicerecord"
+
+                    android:drawableTint="@color/colorIcon"
+                    android:drawablePadding="10dp"/>
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardKondisiMobil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="402dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtKondisiMesin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Mesin"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/conveyor"
+                        android:drawableTint="@color/colorIcon"
+                        android:drawablePadding="10dp"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/txtKondisiKelistrikan"
+                        android:layout_below="@+id/txtKondisiMesin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Kelistrikan"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiPembakaran"
+                        android:layout_below="@+id/txtKondisiKelistrikan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Pembakaran"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiRadiator"
+                        android:layout_below="@+id/txtKondisiPembakaran"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Radiator"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiFisik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Fisik"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/sedan"
+                        android:drawableTint="@color/colorIcon"
+                        android:drawablePadding="10dp"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/txtKondisiRadiator"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiBody"
+                        android:layout_below="@+id/txtKondisiFisik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Body"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiCat"
+                        android:layout_below="@+id/txtKondisiBody"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Cat"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiBan"
+                        android:layout_below="@+id/txtKondisiCat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Ban"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiUndersteel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Understeel"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/sedan"
+                        android:drawableTint="@color/colorIcon"
+                        android:drawablePadding="10dp"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/txtKondisiBan"/>
+                    <TextView
+                        android:id="@+id/txtKondisiTransmisi"
+                        android:layout_below="@+id/txtKondisiUndersteel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Transmisi"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiShockbreaker"
+                        android:layout_below="@+id/txtKondisiTransmisi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Shockbreaker"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiPowerSteering"
+                        android:layout_below="@+id/txtKondisiShockbreaker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi PowerSteering"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiRacksteer"
+                        android:layout_below="@+id/txtKondisiPowerSteering"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Racksteer"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiTerod"
+                        android:layout_below="@+id/txtKondisiRacksteer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Terod"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txtKondisiBaljoin"
+                        android:layout_below="@+id/txtKondisiTerod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Kondisi Baljoin"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="10dp"/>
+
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardKeterangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_custom_backgorund_sheet"
+                app:cardElevation="10dp"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="402dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtKeterangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Keterangan Tambahan"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:drawablePadding="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txtIsiKeterangan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtKeterangan"
+                        android:text="Isi Keterangan"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textSize="17sp"
+                        android:textColor="#000000"/>
+
+
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <Button
+                android:id="@+id/btnBandingData"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:text="Banding ?"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorButton"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
