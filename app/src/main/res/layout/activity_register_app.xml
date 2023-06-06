@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LOGIN.LoginActivity"
-    android:background="#5C6BC0"
-    android:padding="10dp">
+    android:background="#5c6bc0"
+    android:padding="10dp"
+    tools:context=".REGISTER.RegisterAppActivity">
+
 
     <TextView
         android:id="@+id/txtLTitle"
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:text="Login"
+        android:text="Register"
         android:textStyle="bold"
         android:textColor="#ffffff"
         android:textSize="40sp" />
@@ -33,9 +34,38 @@
         android:textSize="15sp"
         android:textStyle="bold|italic"/>
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputNamaUser"
+        android:layout_below="@id/judul"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:hint="Nama User"
+        android:textColorHint="#ffffff"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/ic_baseline_sentiment_satisfied_24"
+        app:startIconTint="#ffffff"
+        app:boxStrokeColor="#ffffff"
+        app:endIconTint="#ffffff"
+        app:placeholderTextColor="#ffffff"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputNamaUser"
+            android:layout_width="match_parent"
+            android:textColor="#ffffff"
+            android:inputType="text"
+            android:layout_height="70dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEmail"
-        android:layout_below="@id/judul"
+        android:layout_below="@id/textInputNamaUser"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="25dp"
@@ -84,7 +114,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_below="@id/textInputPassword"
@@ -94,22 +124,22 @@
         android:layout_marginEnd="25dp"
         android:backgroundTint="#fbfff1"
         android:padding="15dp"
-        android:text="Masuk"
+        android:text="BUAT User"
         android:textColor="#3c3744"
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textBelumPunyaAkun"
+        android:id="@+id/textSudahPunyaAkun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginBottom="10dp"
-        android:text="Belum punya akun?"
+        android:text="Memiliki Akun?"
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textBuatAkun"
+        android:id="@+id/textLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -117,8 +147,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/textBelumPunyaAkun"
-        android:text="Buat Akun"
+        android:layout_toRightOf="@id/textSudahPunyaAkun"
+        android:text="Login"
         android:textStyle="bold"
         android:textColor="#fbfff1"
         android:textSize="15sp" />
