@@ -1,14 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 android {
-    signingConfigs {
-        debug {
-            storeFile file('D:\\Keystore\\dicsut.jks')
-            storePassword '123456'
-            keyAlias 'dicsut'
-            keyPassword '123456'
-        }
-    }
 
     lintOptions {
         checkReleaseBuilds false
