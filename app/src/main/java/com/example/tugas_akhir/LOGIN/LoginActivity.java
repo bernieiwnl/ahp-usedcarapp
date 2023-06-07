@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.HOME.HomeActivity;
+import com.example.tugas_akhir.HOME.HomeAppActivty;
 import com.example.tugas_akhir.MainActivity;
 import com.example.tugas_akhir.R;
 import com.example.tugas_akhir.REGISTER.RegisterActivity;
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtBuatAkun.setOnClickListener(this);
 
         if(firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeAppActivty.class));
             this.finish();
         }
     }
@@ -75,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    startActivity(new Intent(LoginActivity.this, HomeAppActivty.class));
                     finish();
                 }else{
                     Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
