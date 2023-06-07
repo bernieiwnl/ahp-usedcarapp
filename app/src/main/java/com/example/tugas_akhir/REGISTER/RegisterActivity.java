@@ -74,7 +74,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch(v.getId()){
             case R.id.btnRegister:
                 register(txtNamaLengkap.getText().toString().trim(), txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim());
-
                 //startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 break;
             case R.id.textLogin:

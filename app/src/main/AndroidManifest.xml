@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".REGISTER.RegisterAppActivity"
+            android:exported="true" />
+        <activity
             android:name=".REKOMENDASI.RekomendasiAlternatifActivity"
             android:exported="true" />
         <activity

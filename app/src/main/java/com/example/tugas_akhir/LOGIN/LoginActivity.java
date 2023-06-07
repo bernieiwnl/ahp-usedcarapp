@@ -16,6 +16,7 @@ import com.example.tugas_akhir.HOME.HomeActivity;
 import com.example.tugas_akhir.MainActivity;
 import com.example.tugas_akhir.R;
 import com.example.tugas_akhir.REGISTER.RegisterActivity;
+import com.example.tugas_akhir.REGISTER.RegisterAppActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 login(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim());
                 break;
             case R.id.textBuatAkun:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterAppActivity.class));
                 break;
         }
     }
