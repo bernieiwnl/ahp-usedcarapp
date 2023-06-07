@@ -1,5 +1,6 @@
 package com.example.tugas_akhir.REGISTER;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -11,10 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class RegisterAppActivity extends AppCompatActivity implements View.OnClickListener {
@@ -51,32 +57,65 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnRegister: {
+                    try {
+                        // define input
+                        String inputNamaUser = txtNamaUser.getText().toString();
+                        String inputEmail = txtEmail.getText().toString();
+                        String inputPassword = txtPassword.getText().toString();
 
-                    // define input
-                    String inputNamaUser = txtNamaUser.getText().toString();
-                    String inputEmail = txtEmail.getText().toString();
-                    String inputPassword = txtPassword.getText().toString();
+                        // check if input is null than return a message
+                        if(TextUtils.isEmpty(inputNamaUser)){
+                            Toast.makeText(getApplicationContext(), "Nama User Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (TextUtils.isEmpty(inputEmail)){
+                            Toast.makeText(getApplicationContext(), "Email Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                            return;
+                        }else if (TextUtils.isEmpty(inputPassword)){
+                            Toast.makeText(getApplicationContext(), "Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                    // check if input is null than return a message
-                    if(TextUtils.isEmpty(inputNamaUser)){
-                        Toast.makeText(getApplicationContext(), "Nama User Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
-                        return;
-                    } else if (TextUtils.isEmpty(inputEmail)){
-                        Toast.makeText(getApplicationContext(), "Email Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
-                        return;
-                    }else if (TextUtils.isEmpty(inputPassword)){
-                        Toast.makeText(getApplicationContext(), "Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
-                        return;
+                        // registration using firestore
+                        registerData(inputNamaUser, inputEmail, inputPassword);
+
+                    }catch (Exception e){
+                           Log.e("ErrorMsg", e.getMessage());
                     }
-
-                    registerData(inputNamaUser, inputEmail, inputPassword);
 
             }
         }
     }
 
     private void registerData(String namaUser, String email, String password){
-        Toast.makeText(getApplicationContext(), "Register Sukses", Toast.LENGTH_SHORT).show();
+        try{
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()) {
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("idUser", firebaseAuth.getCurrentUser().getUid());
+                        user.put("namaUser", namaUser);
+                        user.put("emailUser", email);
+                        user.put("passwordUser", password);
+
+                        firebaseFirestore.collection("user").document(firebaseAuth.getCurrentUser().getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(getApplicationContext(), "Register Sukses", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), "Register Gagal", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }catch (Exception e){
+            Log.e("ErrorMsg", e.getMessage());
+        }
     }
 
 }
