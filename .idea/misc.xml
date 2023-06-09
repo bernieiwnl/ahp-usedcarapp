@@ -5,13 +5,16 @@
       <map>
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/drawable/android_background_yellow.xml" value="0.2826251896813354" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_add_data_mobil.xml" value="0.22175925925925927" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_add_detail_mobil.xml" value="0.18055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_alternatif.xml" value="0.33055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_mobil_user.xml" value="0.33055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_detail_mobil.xml" value="0.32222222222222224" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_home_app.xml" value="0.5" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_home_app_activty.xml" value="0.33" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_kriteria.xml" value="0.15212443095599393" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_list_kriteria.xml" value="0.33" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_list_pelanggan_app.xml" value="0.18055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_main.xml" value="0.32222222222222224" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_merk_mobil.xml" value="0.32222222222222224" />
@@ -30,6 +33,8 @@
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftar_user_mobil.xml" value="0.33055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftarkriteria.xml" value="0.1" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftarpreferensi.xml" value="0.1" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_foto_mobil.xml" value="0.18055555555555555" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_pelanggan.xml" value="0.33" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/test.xml" value="0.33055555555555555" />
         <entry key="..\:/Freelance/Projek_Tugas_Akhir/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.3880208333333333" />
         <entry key="..\:/Freelance/Projek_Tugas_Akhir/app/src/main/res/drawable/ic_baseline_checklist_rtl_24.xml" value="0.3880208333333333" />

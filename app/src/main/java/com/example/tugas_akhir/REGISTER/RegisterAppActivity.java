@@ -55,57 +55,58 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnRegister: {
-                    try {
-                        // define input
-                        String inputNamaUser = txtNamaUser.getText().toString();
-                        String inputEmail = txtEmail.getText().toString();
-                        String inputPassword = txtPassword.getText().toString();
+                try {
+                    // define input
+                    String inputNamaUser = txtNamaUser.getText().toString();
+                    String inputEmail = txtEmail.getText().toString();
+                    String inputPassword = txtPassword.getText().toString();
 
-                        // check if input is null than return a message
-                        if(TextUtils.isEmpty(inputNamaUser)){
-                            Toast.makeText(getApplicationContext(), "Nama User Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
-                            return;
-                        } else if (TextUtils.isEmpty(inputEmail)){
-                            Toast.makeText(getApplicationContext(), "Email Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
-                            return;
-                        }else if (TextUtils.isEmpty(inputPassword)){
-                            Toast.makeText(getApplicationContext(), "Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        // registration using firestore
-                        registerData(inputNamaUser, inputEmail, inputPassword);
-
-                    }catch (Exception e){
-                           Log.e("ErrorMsg", e.getMessage());
+                    // check if input is null than return a message
+                    if (TextUtils.isEmpty(inputNamaUser)) {
+                        Toast.makeText(getApplicationContext(), "Nama User Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (TextUtils.isEmpty(inputEmail)) {
+                        Toast.makeText(getApplicationContext(), "Email Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (TextUtils.isEmpty(inputPassword)) {
+                        Toast.makeText(getApplicationContext(), "Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                        return;
                     }
 
+                    // registration using firestore
+                    registerData(inputNamaUser, inputEmail, inputPassword);
+
+                } catch (Exception e) {
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                break;
             }
         }
     }
 
-    private void registerData(String namaUser, String email, String password){
-        try{
+    private void registerData(String namaUser, String email, String password) {
+        try {
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         Map<String, Object> user = new HashMap<>();
                         user.put("idUser", firebaseAuth.getCurrentUser().getUid());
                         user.put("namaUser", namaUser);
                         user.put("emailUser", email);
                         user.put("passwordUser", password);
+                        user.put("idPelanggan", "");
 
                         firebaseFirestore.collection("user").document(firebaseAuth.getCurrentUser().getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Register Sukses", Toast.LENGTH_SHORT).show();
                                     finish();
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(getApplicationContext(), "Register Gagal", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -113,8 +114,9 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
                     }
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
