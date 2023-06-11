@@ -226,7 +226,7 @@ public class PreferensiPelangganAppActivity extends AppCompatActivity implements
 
         Map<String, Object> preferensi = new HashMap<>();
         preferensi.put("idPelanggan", pelangganId);
-        preferensi.put("namaPreferensi", dataPreferensi);
+        preferensi.put("preferensi_kriterias", dataPreferensi);
 
         preferensiDb.set(preferensi).addOnCompleteListener(task -> {
             try {
