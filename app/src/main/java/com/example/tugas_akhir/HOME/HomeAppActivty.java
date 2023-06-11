@@ -29,7 +29,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
 
     private FirebaseFirestore firebaseFirestoredb;
     private Firestore firestore;
-    private DocumentReference documentReference;
+    private DocumentReference userDb;
     private String getCurrentUserUid;
     private TextView txtViewNamaUser, txtViewUbahPelanggan, txtViewNamaPelanggan, txtViewAlamatPelanggan;
 
@@ -72,9 +72,9 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         firebaseFirestoredb = FirebaseFirestore.getInstance();
         firestore = new Firestore();
         getCurrentUserUid = firestore.getFirebaseAuth().getCurrentUser().getUid();
-        documentReference = firebaseFirestoredb.collection("user").document(getCurrentUserUid);
+        userDb = firebaseFirestoredb.collection("user").document(getCurrentUserUid);
 
-        documentReference.addSnapshotListener((documentSnapshot, error) -> {
+        userDb.addSnapshotListener((documentSnapshot, error) -> {
             try {
                 if (error != null) {
                     Log.e("ErrorMsg", error.getMessage());
