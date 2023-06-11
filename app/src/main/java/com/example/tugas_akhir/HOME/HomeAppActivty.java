@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.LOGIN.LoginActivity;
 import com.example.tugas_akhir.PELANGGAN.ListPelangganAppActivity;
+import com.example.tugas_akhir.PELANGGAN.PREFERENSI.UbahPreferensiPelangganAppActivity;
 import com.example.tugas_akhir.R;
 import com.example.tugas_akhir.REGISTER.RegisterAppActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,9 +30,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 public class HomeAppActivty extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseFirestore firebaseFirestoredb;
+    private Button btnPreferensiPelanggan;
     private Firestore firestore;
-    private DocumentReference documentReference;
-    private String getCurrentUserUid;
+    private DocumentReference userDb;
+    private String getCurrentUserUid, getIdPelanggan;
     private TextView txtViewNamaUser, txtViewUbahPelanggan, txtViewNamaPelanggan, txtViewAlamatPelanggan;
 
     @Override
@@ -44,11 +47,14 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         txtViewNamaPelanggan = (TextView) findViewById(R.id.txtNamaPelanggan);
         txtViewAlamatPelanggan = (TextView) findViewById(R.id.txtAlamatPelanggan);
 
+        //button
+        btnPreferensiPelanggan = (Button) findViewById(R.id.btnPreferensi);
+
         //fetch data
         fetchData();
-
         //set OnClick
         txtViewUbahPelanggan.setOnClickListener(this);
+        btnPreferensiPelanggan.setOnClickListener(this);
 
     }
 
@@ -64,6 +70,17 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             }
+            case R.id.btnPreferensi:{
+                try{
+                    Intent i = new Intent(HomeAppActivty.this, UbahPreferensiPelangganAppActivity.class);
+                    i.putExtra("idPelanggan", getIdPelanggan);
+                    startActivityForResult(i, 1);
+                }catch (Exception e){
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
         }
     }
 
@@ -72,9 +89,9 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         firebaseFirestoredb = FirebaseFirestore.getInstance();
         firestore = new Firestore();
         getCurrentUserUid = firestore.getFirebaseAuth().getCurrentUser().getUid();
-        documentReference = firebaseFirestoredb.collection("user").document(getCurrentUserUid);
+        userDb = firebaseFirestoredb.collection("user").document(getCurrentUserUid);
 
-        documentReference.addSnapshotListener((documentSnapshot, error) -> {
+        userDb.addSnapshotListener((documentSnapshot, error) -> {
             try {
                 if (error != null) {
                     Log.e("ErrorMsg", error.getMessage());
@@ -87,9 +104,11 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                 }
                 // Document exists, retrieve the data
                 String namaUser = documentSnapshot.getString("namaUser");
-                String getIdPelanggan = documentSnapshot.getString("idPelanggan");
+                getIdPelanggan = documentSnapshot.getString("idPelanggan");
+
                 // Do something with the retrieved data
                 txtViewNamaUser.setText(namaUser);
+
 
                 if (!TextUtils.isEmpty(getIdPelanggan)) {
                     DocumentReference pelangganDb = firebaseFirestoredb.collection("pelanggan").document(getIdPelanggan);
@@ -100,7 +119,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                         // Document exists, retrieve the data
                         String namaPelanggan = documentSnapshotPelanggan.getString("namaPelanggan");
                         String alamatPelanggan = documentSnapshotPelanggan.getString("alamatPelanggan");
-                        // Do something with the retrieved data
+                                // Do something with the retrieved data
                         txtViewNamaPelanggan.setText(namaPelanggan);
                         txtViewAlamatPelanggan.setText(alamatPelanggan);
                     }).addOnFailureListener(e -> {

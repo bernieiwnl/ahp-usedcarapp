@@ -37,7 +37,7 @@ public class DaftarKriteriaAdapter extends RecyclerView.Adapter<DaftarKriteriaAd
             @Override
             public void onClick(View v) {
                 Intent i = new Intent();
-                i.putExtra("kriteria", kriterias.get(p));
+                i.putExtra("preferensi", kriterias.get(p));
                 ((Activity)c).setResult(Activity.RESULT_OK, i);
                 ((Activity)c).finish();
             }
