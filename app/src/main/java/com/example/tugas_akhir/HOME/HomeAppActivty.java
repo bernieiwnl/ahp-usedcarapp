@@ -3,6 +3,7 @@ package com.example.tugas_akhir.HOME;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.LOGIN.LoginActivity;
+import com.example.tugas_akhir.PELANGGAN.ADAPTER.ListUbahPelangganAdapter;
+import com.example.tugas_akhir.PELANGGAN.ListDaftarPelangganAppActivity;
 import com.example.tugas_akhir.PELANGGAN.ListPelangganAppActivity;
 import com.example.tugas_akhir.PELANGGAN.PREFERENSI.UbahPreferensiPelangganAppActivity;
 import com.example.tugas_akhir.R;
@@ -35,6 +38,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
     private DocumentReference userDb;
     private String getCurrentUserUid, getIdPelanggan;
     private TextView txtViewNamaUser, txtViewUbahPelanggan, txtViewNamaPelanggan, txtViewAlamatPelanggan;
+    private CardView cardViewDaftarPelanggan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,9 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         txtViewNamaPelanggan = (TextView) findViewById(R.id.txtNamaPelanggan);
         txtViewAlamatPelanggan = (TextView) findViewById(R.id.txtAlamatPelanggan);
 
+        //cardview
+        cardViewDaftarPelanggan = (CardView) findViewById(R.id.daftarPelangganCardView);
+
         //button
         btnPreferensiPelanggan = (Button) findViewById(R.id.btnPreferensi);
 
@@ -55,6 +62,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         //set OnClick
         txtViewUbahPelanggan.setOnClickListener(this);
         btnPreferensiPelanggan.setOnClickListener(this);
+        cardViewDaftarPelanggan.setOnClickListener(this);
 
     }
 
@@ -70,12 +78,21 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             }
-            case R.id.btnPreferensi:{
-                try{
+            case R.id.btnPreferensi: {
+                try {
                     Intent i = new Intent(HomeAppActivty.this, UbahPreferensiPelangganAppActivity.class);
                     i.putExtra("idPelanggan", getIdPelanggan);
                     startActivityForResult(i, 1);
-                }catch (Exception e){
+                } catch (Exception e) {
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case R.id.daftarPelangganCardView: {
+                try {
+                    startActivity(new Intent(HomeAppActivty.this, ListDaftarPelangganAppActivity.class));
+                } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -112,19 +129,16 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
 
                 if (!TextUtils.isEmpty(getIdPelanggan)) {
                     DocumentReference pelangganDb = firebaseFirestoredb.collection("pelanggan").document(getIdPelanggan);
-                    pelangganDb.get().addOnSuccessListener(documentSnapshotPelanggan -> {
+                    pelangganDb.addSnapshotListener((documentSnapshotPelanggan, error1) -> {
                         if (documentSnapshotPelanggan == null && !documentSnapshotPelanggan.exists()) {
                             return;
                         }
                         // Document exists, retrieve the data
                         String namaPelanggan = documentSnapshotPelanggan.getString("namaPelanggan");
                         String alamatPelanggan = documentSnapshotPelanggan.getString("alamatPelanggan");
-                                // Do something with the retrieved data
+                        // Do something with the retrieved data
                         txtViewNamaPelanggan.setText(namaPelanggan);
                         txtViewAlamatPelanggan.setText(alamatPelanggan);
-                    }).addOnFailureListener(e -> {
-                        Log.e("ErrorMsg", e.getMessage());
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
                 }
 

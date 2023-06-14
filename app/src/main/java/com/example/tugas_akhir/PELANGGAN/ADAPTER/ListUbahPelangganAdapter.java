@@ -1,7 +1,8 @@
-package com.example.tugas_akhir.PELANGGAN;
+package com.example.tugas_akhir.PELANGGAN.ADAPTER;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.CLASS.Pelanggan;
+import com.example.tugas_akhir.PELANGGAN.PREFERENSI.UbahPreferensiPelangganAppActivity;
 import com.example.tugas_akhir.R;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,11 +28,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListPelangganAdapter extends RecyclerView.Adapter<ListPelangganAdapter.MyViewHolder> {
+public class ListUbahPelangganAdapter extends RecyclerView.Adapter<ListUbahPelangganAdapter.MyViewHolder> {
     private ArrayList<Pelanggan> pelanggans;
     private Context context;
 
-    public ListPelangganAdapter(Context context, ArrayList<Pelanggan> pelanggans) {
+    public ListUbahPelangganAdapter(Context context, ArrayList<Pelanggan> pelanggans) {
         this.context = context;
         this.pelanggans = pelanggans;
     }
@@ -39,7 +40,7 @@ public class ListPelangganAdapter extends RecyclerView.Adapter<ListPelangganAdap
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ListPelangganAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.list_custom_layout_pelanggan, parent, false));
+        return new ListUbahPelangganAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.list_custom_layout_pelanggan, parent, false));
     }
 
     @Override
@@ -51,7 +52,10 @@ public class ListPelangganAdapter extends RecyclerView.Adapter<ListPelangganAdap
         holder.btnPilihPelanggan.setOnClickListener(v -> updatePelanggan(pelanggans.get(position).getIdPelanggan()));
 
         holder.btnPreferensi.setOnClickListener(v -> {
-
+            Intent i = new Intent(context, UbahPreferensiPelangganAppActivity.class);
+            i.putExtra("idPelanggan", pelanggans.get(position).getIdPelanggan());
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.getApplicationContext().startActivity(i);
         });
     }
 

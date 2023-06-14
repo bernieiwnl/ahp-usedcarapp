@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PELANGGAN.UbahPelangganAppActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PELANGGAN.ListDaftarPelangganAppActivity"
+            android:exported="true" />
+        <activity
             android:name=".PELANGGAN.PREFERENSI.UbahPreferensiPelangganAppActivity"
             android:exported="true" />
         <activity
