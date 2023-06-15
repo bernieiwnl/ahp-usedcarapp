@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,7 +24,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class ListPelangganAppActivity extends AppCompatActivity implements View.OnClickListener {
+public class ListPelangganAppActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     private FirebaseFirestore firebaseFirestore;
     private Firestore firestore;
@@ -30,6 +33,9 @@ public class ListPelangganAppActivity extends AppCompatActivity implements View.
     private RecyclerView recyclerViewPelanggan;
     private ImageView imgViewKembali, imgViewTambahPelanggan;
     private ArrayList<Pelanggan> pelanggans;
+    private EditText editTextPencarian;
+
+
     private ListUbahPelangganAdapter listUbahPelangganAdapter;
 
 
@@ -46,6 +52,9 @@ public class ListPelangganAppActivity extends AppCompatActivity implements View.
         recyclerViewPelanggan = (RecyclerView) findViewById(R.id.recycler_pelanggan);
         recyclerViewPelanggan.setLayoutManager(new LinearLayoutManager(this));
 
+        //EditTextView
+        editTextPencarian = (EditText) findViewById(R.id.editText_pencarian);
+
         // new Array List
         pelanggans = new ArrayList<>();
 
@@ -55,20 +64,20 @@ public class ListPelangganAppActivity extends AppCompatActivity implements View.
         //setOnclick
         imgViewTambahPelanggan.setOnClickListener(this);
         imgViewKembali.setOnClickListener(this);
-
+        editTextPencarian.addTextChangedListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.imageView_back:{
+        switch (v.getId()) {
+            case R.id.imageView_back: {
                 this.finish();
                 break;
             }
-            case R.id.imageView_tambahPelanggan:{
-                try{
+            case R.id.imageView_tambahPelanggan: {
+                try {
                     startActivity(new Intent(ListPelangganAppActivity.this, TambahPelangganAppActivity.class));
-                }catch (Exception e){
+                } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -77,7 +86,22 @@ public class ListPelangganAppActivity extends AppCompatActivity implements View.
         }
     }
 
-    public void fetchData() {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        filterData(s.toString());
+    }
+
+    private void fetchData() {
         try {
             firebaseFirestore = FirebaseFirestore.getInstance();
             firestore = new Firestore();
@@ -100,7 +124,26 @@ public class ListPelangganAppActivity extends AppCompatActivity implements View.
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-
     }
+
+    private void filterData(String search) {
+        try {
+            ArrayList<Pelanggan> pelanggansAfterSearch = new ArrayList<>();
+            pelanggansAfterSearch.clear();
+
+            for (Pelanggan pelanggan : pelanggans
+            ) {
+                if (pelanggan.getNamaPelanggan().toLowerCase().contains(search.toLowerCase())) {
+                    pelanggansAfterSearch.add(pelanggan);
+                }
+
+                listUbahPelangganAdapter = new ListUbahPelangganAdapter(ListPelangganAppActivity.this, pelanggansAfterSearch);
+                recyclerViewPelanggan.setAdapter(listUbahPelangganAdapter);
+            }
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

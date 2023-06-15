@@ -49,13 +49,12 @@
                 android:id="@+id/editText_searchBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:padding="15dp"
-                android:hint="Cari Mobil..."
-                android:drawablePadding="5dp"
+                android:background="@drawable/ic_custom_search_bar"
                 android:drawableRight="@drawable/ic_baseline_search_24"
-                android:background="@drawable/ic_custom_search_bar">
-            </EditText>
+                android:drawablePadding="5dp"
+                android:hint="Cari Mobil..."
+                android:padding="15dp"
+                android:textSize="14sp"></EditText>
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
