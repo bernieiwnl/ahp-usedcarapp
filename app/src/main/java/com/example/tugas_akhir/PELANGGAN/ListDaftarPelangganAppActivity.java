@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,7 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class ListDaftarPelangganAppActivity extends AppCompatActivity implements View.OnClickListener {
+public class ListDaftarPelangganAppActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     private FirebaseFirestore firebaseFirestore;
     private CollectionReference pelangganDb;
@@ -30,9 +33,10 @@ public class ListDaftarPelangganAppActivity extends AppCompatActivity implements
 
     private RecyclerView recyclerViewPelanggan;
     private ImageView imgViewKembali, imgViewTambahPelanggan;
+    private EditText editTextPencarian;
+
     private ArrayList<Pelanggan> pelanggans;
     private ListDaftarPelangganAdapter listDaftarPelangganAdapter;
-
 
 
     @Override
@@ -48,6 +52,9 @@ public class ListDaftarPelangganAppActivity extends AppCompatActivity implements
         recyclerViewPelanggan = (RecyclerView) findViewById(R.id.recycler_pelanggan);
         recyclerViewPelanggan.setLayoutManager(new LinearLayoutManager(this));
 
+        //EditTextView
+        editTextPencarian = (EditText) findViewById(R.id.editText_pencarian);
+
         // new Array List
         pelanggans = new ArrayList<>();
 
@@ -57,25 +64,41 @@ public class ListDaftarPelangganAppActivity extends AppCompatActivity implements
         //setOnclick
         imgViewTambahPelanggan.setOnClickListener(this);
         imgViewKembali.setOnClickListener(this);
+        editTextPencarian.addTextChangedListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.imageView_back:{
+        switch (v.getId()) {
+            case R.id.imageView_back: {
                 this.finish();
                 break;
             }
-            case R.id.imageView_tambahPelanggan:{
-                try{
+            case R.id.imageView_tambahPelanggan: {
+                try {
                     startActivity(new Intent(ListDaftarPelangganAppActivity.this, TambahPelangganAppActivity.class));
-                }catch (Exception e){
+                } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        filterData(s.toString());
     }
 
     public void fetchData() {
@@ -97,6 +120,26 @@ public class ListDaftarPelangganAppActivity extends AppCompatActivity implements
                 listDaftarPelangganAdapter = new ListDaftarPelangganAdapter(ListDaftarPelangganAppActivity.this, pelanggans);
                 recyclerViewPelanggan.setAdapter(listDaftarPelangganAdapter);
             });
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void filterData(String search) {
+        try {
+            ArrayList<Pelanggan> pelanggansAfterSearch = new ArrayList<>();
+            pelanggansAfterSearch.clear();
+
+            for (Pelanggan pelanggan : pelanggans
+            ) {
+                if (pelanggan.getNamaPelanggan().toLowerCase().contains(search.toLowerCase())) {
+                    pelanggansAfterSearch.add(pelanggan);
+                }
+
+                listDaftarPelangganAdapter = new ListDaftarPelangganAdapter(ListDaftarPelangganAppActivity.this, pelanggansAfterSearch);
+                recyclerViewPelanggan.setAdapter(listDaftarPelangganAdapter);
+            }
         } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
