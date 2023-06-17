@@ -36,7 +36,7 @@ public class WarnaAppAdapter extends RecyclerView.Adapter<WarnaAppAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return 0;
+        return warnaMobil.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
