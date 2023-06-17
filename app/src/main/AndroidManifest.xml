@@ -10,6 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MOBIL.MASTER.ListWarnaAppActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MOBIL.MASTER.ListKelengkapanAppActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MOBIL.MASTER.ListKeadaanBodyAppActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MOBIL.UbahMobilAppActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MOBIL.TambahMobilAppActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MOBIL.ListDaftarMobilAppActivity"
+            android:exported="true" />
+        <activity
             android:name=".PELANGGAN.UbahPelangganAppActivity"
             android:exported="true" />
         <activity

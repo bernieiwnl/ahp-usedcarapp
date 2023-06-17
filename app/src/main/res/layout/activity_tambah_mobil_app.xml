@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MOBIL.TambahMobilAppActivity">
+
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/imageView_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:tint="#000000" />
+
+        <TextView
+            android:id="@+id/txtJudul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Data Mobil"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView_tambahPelanggan"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_baseline_save_24"
+            app:tint="#000000" />
+
+    </RelativeLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Input Informasi Mobil"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_fotoMobil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Foto Mobil"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    android:textStyle="bold"></TextView>
+
+
+                <Button
+                    android:id="@+id/btnPreferensi"
+                    android:layout_width="100dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#ff6c2f"
+                    android:padding="0dp"
+                    android:text="Tambah Foto"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Nama dan Merk Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputNamaMerkMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Nama, Merk Mobil"
+                app:boxBackgroundMode="outline"
+                app:endIconMode="clear_text"
+                app:helperText="Inputkan nama dan merk mobil dengan lengkap">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputNamaMerkMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:text=""
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Tipe Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/radioGrup_tipeMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/tipeSUV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SUV"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/tipeHatchBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="HatchBack"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/tipeSedan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Sedan"></RadioButton>
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Transmisi Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/radioGrup_transmisiMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/transmisiAutomatic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Otomatis"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/transmisiManual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Manual"></RadioButton>
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Tahun Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputTahunMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Tahun Mobil"
+                app:boxBackgroundMode="outline"
+                app:endIconMode="clear_text"
+                app:helperText="Inputkan tahun mobil dengan benar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTahunMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:text=""
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Kilometer Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputKilometerMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Kilometer Mobil (KM)"
+                app:boxBackgroundMode="outline"
+                app:endIconMode="clear_text"
+                app:helperText="Inputkan kilometer mobil dengan benar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputKilometerMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:text=""
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Warna Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputWarnaMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Pilih Warna Mobil"
+                app:boxBackgroundMode="outline"
+                app:helperText="Pilih warna yang sesuai">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputWarnaMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:padding="15dp"
+                    android:text="Merah"
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Kapasitas Mesin Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputKapasitasMesin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Kapasitas Mesin (CC)"
+                app:boxBackgroundMode="outline"
+                app:endIconMode="clear_text"
+                app:helperText="Inputkan kapasitas mesin mobil dalam CC">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputKapasitasMesin"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:text=""
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Harga Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputHargaMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Harga Mobil (Rp.)"
+                app:boxBackgroundMode="outline"
+                app:endIconMode="clear_text"
+                app:helperText="Inputkan harga mobil dalam rupiah">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputHargaMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:text=""
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Sejarah Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputSejarahMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Sejarah Mobil"
+                app:boxBackgroundMode="outline"
+                app:endIconMode="clear_text"
+                app:helperText="Inputkan sejarah mobil dengan lengkap dan benar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputSejarahMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:padding="15dp"
+                    android:text=""
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#e0e0e0"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Input Kondisi Mobil"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Kondisi Mesin"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/radioGrup_kondisiMesinMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/kondisiMesinKasar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Suara Mesin Kasar"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/kondisiMesinHalus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Suara Mesin Halus"></RadioButton>
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Service Record Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/radioGrup_serviceRecordMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/serviceRutin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rutin"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/serviceTerkadang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Terkadang"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/serviceJarang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Jarang"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/serviceTidakPernah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Tidak"></RadioButton>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Kondisi Interior"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/radioGrup_kondisiInterior"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/interiorAsli"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Interior Asli"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/interiorTidakAsli"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Interior tidak Asli"></RadioButton>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Keadaan Body Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputKondisiBodyMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Pilih Keadaan Body Mobil"
+                app:boxBackgroundMode="outline"
+                app:helperText="Pilih keadaan body yang sesuai">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputKeadaanBodyMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:padding="15dp"
+                    android:text=" "
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Kelengkapan Mobil"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputKelengkapanMobil"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Pilih kelengkapan Mobil"
+                app:boxBackgroundMode="outline"
+                app:helperText="Pilih kelengkapan yang sesuai">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputKelengkapanMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:padding="15dp"
+                    android:text=" "
+                    android:textSize="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

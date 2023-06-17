@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.LOGIN.LoginActivity;
+import com.example.tugas_akhir.MOBIL.TambahMobilAppActivity;
 import com.example.tugas_akhir.PELANGGAN.ADAPTER.ListUbahPelangganAdapter;
 import com.example.tugas_akhir.PELANGGAN.ListDaftarPelangganAppActivity;
 import com.example.tugas_akhir.PELANGGAN.ListPelangganAppActivity;
@@ -38,7 +39,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
     private DocumentReference userDb;
     private String getCurrentUserUid, getIdPelanggan;
     private TextView txtViewNamaUser, txtViewUbahPelanggan, txtViewNamaPelanggan, txtViewAlamatPelanggan;
-    private CardView cardViewDaftarPelanggan;
+    private CardView cardViewDaftarPelanggan, cardViewDaftarMobil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
 
         //cardview
         cardViewDaftarPelanggan = (CardView) findViewById(R.id.daftarPelangganCardView);
+        cardViewDaftarMobil = (CardView) findViewById(R.id.daftarMobilCardView);
 
         //button
         btnPreferensiPelanggan = (Button) findViewById(R.id.btnPreferensi);
@@ -63,6 +65,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         txtViewUbahPelanggan.setOnClickListener(this);
         btnPreferensiPelanggan.setOnClickListener(this);
         cardViewDaftarPelanggan.setOnClickListener(this);
+        cardViewDaftarMobil.setOnClickListener(this);
 
     }
 
@@ -97,6 +100,14 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 break;
+            }
+            case R.id.daftarMobilCardView: {
+                try{
+                    startActivity(new Intent(HomeAppActivty.this, TambahMobilAppActivity.class));
+                }catch (Exception e){
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
