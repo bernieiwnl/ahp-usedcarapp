@@ -93,7 +93,7 @@
 
 
                 <Button
-                    android:id="@+id/btnPreferensi"
+                    android:id="@+id/btnTambahFoto"
                     android:layout_width="100dp"
                     android:layout_height="45dp"
                     android:layout_alignParentEnd="true"
