@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.ADAPTER.FotoMobilAdapter;
@@ -30,7 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class TambahMobilAppActivity extends AppCompatActivity implements View.OnClickListener {
+public class TambahMobilAppActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private TextInputEditText txtInputWarna,
             txtInputKeadaanMobil,
@@ -41,6 +43,17 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
             txtInputKapasitasMesinMobil,
             txtInputHargaMobil,
             txtInputSejarahMobil;
+
+
+    //tipe mobil
+    private RadioGroup radioGroupTipeMobil;
+    private RadioButton radioButtonTipeSuv, radioButtonTipeHatchBack, radioButtonTipeSedan;
+    private String txtTipeMobil;
+
+    //transmisi mpbil
+    private RadioGroup radioGroupTransmisiMobil;
+    private RadioButton radioButtonTransmisiOtomatis, radioButtonTransmisiManual, radioButtonTransmisiKeduanya;
+    private String txtTransmisiMobil;
 
     private Button btnTambahFoto;
     private RecyclerView recyclerView_fotoMobil;
@@ -67,6 +80,25 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
         txtInputHargaMobil = (TextInputEditText) findViewById(R.id.inputHargaMobil);
         txtInputSejarahMobil = (TextInputEditText) findViewById(R.id.inputSejarahMobil);
 
+        //string
+        txtTipeMobil = null;
+        txtTransmisiMobil = null;
+
+        //radiobutton & grup
+        //tipe mobil
+        radioGroupTipeMobil = (RadioGroup) findViewById(R.id.radioGrup_tipeMobil);
+        radioButtonTipeSuv = (RadioButton) findViewById(R.id.tipeSUV);
+        radioButtonTipeHatchBack = (RadioButton) findViewById(R.id.tipeHatchBack);
+        radioButtonTipeSedan = (RadioButton) findViewById(R.id.tipeSedan);
+        //transmisi mobil
+        radioGroupTransmisiMobil = (RadioGroup) findViewById(R.id.radioGrup_transmisiMobil);
+        radioButtonTransmisiOtomatis = (RadioButton) findViewById(R.id.transmisiAutomatic);
+        radioButtonTransmisiManual = (RadioButton) findViewById(R.id.transmisiManual);
+        radioButtonTransmisiKeduanya = (RadioButton) findViewById(R.id.transmisiKeduanya);
+
+        //Set On Check Change Listener
+        radioGroupTipeMobil.setOnCheckedChangeListener(this);
+        radioGroupTransmisiMobil.setOnCheckedChangeListener(this);
 
         //RecylerView
         recyclerView_fotoMobil = (RecyclerView) findViewById(R.id.recycler_fotoMobil);
@@ -180,6 +212,37 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
         } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.tipeSUV: {
+                txtTipeMobil = "SUV";
+                break;
+            }
+            case R.id.tipeHatchBack: {
+                txtTipeMobil = "Hatchback";
+                break;
+            }
+            case R.id.tipeSedan: {
+                txtTipeMobil = "Sedan";
+                break;
+            }
+            case R.id.transmisiAutomatic: {
+                txtTransmisiMobil = "Matic";
+                break;
+            }
+            case R.id.transmisiManual: {
+                txtTransmisiMobil = "Manual";
+                break;
+            }
+            case R.id.transmisiKeduanya: {
+                txtTransmisiMobil = "Keduanya";
+                break;
+            }
+
         }
     }
 }

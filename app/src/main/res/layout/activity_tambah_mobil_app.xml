@@ -214,6 +214,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="Manual"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/transmisiKeduanya"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Keduanya"></RadioButton>
                 </RadioGroup>
 
             </RelativeLayout>
