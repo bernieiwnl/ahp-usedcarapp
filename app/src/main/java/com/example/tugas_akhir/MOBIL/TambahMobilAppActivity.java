@@ -44,7 +44,6 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
             txtInputHargaMobil,
             txtInputSejarahMobil;
 
-
     //tipe mobil
     private RadioGroup radioGroupTipeMobil;
     private RadioButton radioButtonTipeSuv, radioButtonTipeHatchBack, radioButtonTipeSedan;
@@ -54,6 +53,21 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
     private RadioGroup radioGroupTransmisiMobil;
     private RadioButton radioButtonTransmisiOtomatis, radioButtonTransmisiManual, radioButtonTransmisiKeduanya;
     private String txtTransmisiMobil;
+
+    //service record
+    private RadioGroup radioGroupServiceRecordMobil;
+    private RadioButton radioButtonServiceRutin, radioButtonServiceTerkadang, radioButtonServiceJarang, radioButtonServiceTidakPernah;
+    private String txtServiceMobil;
+
+    //kondisi mesin
+    private RadioGroup radioGroupKondisiMesinMobil;
+    private RadioButton radioButtonKondisiMesinKasar, radioButtonKondisiMesinHalus;
+    private String txtKondisiMesin;
+
+    //kondisi interior
+    private RadioGroup radioGroupKondisiInterior;
+    private RadioButton radioButtonInteriorAsli, radioButtonInteriorTidakAsli;
+    private String txtKondisiInterior;
 
     private Button btnTambahFoto;
     private RecyclerView recyclerView_fotoMobil;
@@ -83,6 +97,9 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
         //string
         txtTipeMobil = null;
         txtTransmisiMobil = null;
+        txtKondisiMesin = null;
+        txtServiceMobil = null;
+        txtKondisiInterior = null;
 
         //radiobutton & grup
         //tipe mobil
@@ -95,10 +112,27 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
         radioButtonTransmisiOtomatis = (RadioButton) findViewById(R.id.transmisiAutomatic);
         radioButtonTransmisiManual = (RadioButton) findViewById(R.id.transmisiManual);
         radioButtonTransmisiKeduanya = (RadioButton) findViewById(R.id.transmisiKeduanya);
+        //kondisi mesin
+        radioGroupKondisiMesinMobil = (RadioGroup) findViewById(R.id.radioGrup_kondisiMesinMobil);
+        radioButtonKondisiMesinKasar = (RadioButton) findViewById(R.id.kondisiMesinKasar);
+        radioButtonKondisiMesinHalus = (RadioButton) findViewById(R.id.kondisiMesinHalus);
+        //Service Record Mobil
+        radioGroupServiceRecordMobil = (RadioGroup) findViewById(R.id.radioGrup_serviceRecordMobil);
+        radioButtonServiceRutin = (RadioButton) findViewById(R.id.serviceRutin);
+        radioButtonServiceTerkadang = (RadioButton) findViewById(R.id.serviceTerkadang);
+        radioButtonServiceJarang = (RadioButton) findViewById(R.id.serviceJarang);
+        radioButtonServiceTidakPernah = (RadioButton) findViewById(R.id.serviceTidakPernah);
+        //kondisi interior
+        radioGroupKondisiInterior = (RadioGroup) findViewById(R.id.radioGrup_kondisiInterior);
+        radioButtonInteriorAsli = (RadioButton) findViewById(R.id.interiorAsli);
+        radioButtonInteriorTidakAsli = (RadioButton) findViewById(R.id.interiorTidakAsli);
 
         //Set On Check Change Listener
         radioGroupTipeMobil.setOnCheckedChangeListener(this);
         radioGroupTransmisiMobil.setOnCheckedChangeListener(this);
+        radioGroupKondisiMesinMobil.setOnCheckedChangeListener(this);
+        radioGroupServiceRecordMobil.setOnCheckedChangeListener(this);
+        radioGroupKondisiInterior.setOnCheckedChangeListener(this);
 
         //RecylerView
         recyclerView_fotoMobil = (RecyclerView) findViewById(R.id.recycler_fotoMobil);
@@ -242,7 +276,38 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                 txtTransmisiMobil = "Keduanya";
                 break;
             }
-
+            case R.id.kondisiMesinHalus: {
+                txtKondisiMesin = "Suara Mesin Kasar";
+                break;
+            }
+            case R.id.kondisiMesinKasar: {
+                txtKondisiMesin = "Suara Mesin Halus";
+                break;
+            }
+            case R.id.serviceRutin: {
+                txtServiceMobil = "Rutin";
+                break;
+            }
+            case R.id.serviceTerkadang: {
+                txtServiceMobil = "Terkadang";
+                break;
+            }
+            case R.id.serviceJarang: {
+                txtServiceMobil = "Jarang";
+                break;
+            }
+            case R.id.serviceTidakPernah: {
+                txtServiceMobil = "Tidak Pernah";
+                break;
+            }
+            case R.id.interiorAsli: {
+                txtKondisiInterior = "Interior Asli";
+                break;
+            }
+            case R.id.interiorTidakAsli: {
+                txtKondisiInterior = "Interior Palsu";
+                break;
+            }
         }
     }
 }
