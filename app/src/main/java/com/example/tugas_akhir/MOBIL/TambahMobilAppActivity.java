@@ -193,6 +193,7 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
         txtInputKeadaanMobil.setOnClickListener(this);
         btnTambahFoto.setOnClickListener(this);
         imageViewSimpanMobil.setOnClickListener(this);
+        imageViewBack.setOnClickListener(this);
 
         //setAdapter
         fotoMobilAdapter = new FotoMobilAdapter(fileImageList, TambahMobilAppActivity.this);

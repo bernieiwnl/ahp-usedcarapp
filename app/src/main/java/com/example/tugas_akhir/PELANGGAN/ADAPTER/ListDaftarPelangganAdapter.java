@@ -23,7 +23,7 @@ public class ListDaftarPelangganAdapter extends RecyclerView.Adapter<ListDaftarP
     private ArrayList<Pelanggan> pelanggans;
     private Context context;
 
-    public ListDaftarPelangganAdapter(Context context, ArrayList<Pelanggan> pelanggans){
+    public ListDaftarPelangganAdapter(Context context, ArrayList<Pelanggan> pelanggans) {
         this.context = context;
         this.pelanggans = pelanggans;
     }

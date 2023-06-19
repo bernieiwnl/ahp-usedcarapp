@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.LOGIN.LoginActivity;
+import com.example.tugas_akhir.MOBIL.ListDaftarMobilAppActivity;
 import com.example.tugas_akhir.MOBIL.TambahMobilAppActivity;
 import com.example.tugas_akhir.PELANGGAN.ADAPTER.ListUbahPelangganAdapter;
 import com.example.tugas_akhir.PELANGGAN.ListDaftarPelangganAppActivity;
@@ -94,7 +95,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.daftarPelangganCardView: {
                 try {
-                    startActivity(new Intent(HomeAppActivty.this, ListDaftarPelangganAppActivity.class));
+                    startActivity(new Intent(HomeAppActivty.this, ListPelangganAppActivity.class));
                 } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -102,9 +103,9 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                 break;
             }
             case R.id.daftarMobilCardView: {
-                try{
-                    startActivity(new Intent(HomeAppActivty.this, TambahMobilAppActivity.class));
-                }catch (Exception e){
+                try {
+                    startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
+                } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

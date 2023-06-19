@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MOBIL.DetailMobilAppActivity"
+            android:exported="true" />
+        <activity
             android:name=".MOBIL.MASTER.ListWarnaAppActivity"
             android:exported="true" />
         <activity

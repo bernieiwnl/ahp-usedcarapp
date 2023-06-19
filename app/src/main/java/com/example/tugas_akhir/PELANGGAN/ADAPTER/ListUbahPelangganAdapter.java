@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.CLASS.Pelanggan;
 import com.example.tugas_akhir.PELANGGAN.PREFERENSI.UbahPreferensiPelangganAppActivity;
+import com.example.tugas_akhir.PELANGGAN.UbahPelangganAppActivity;
 import com.example.tugas_akhir.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -48,6 +50,13 @@ public class ListUbahPelangganAdapter extends RecyclerView.Adapter<ListUbahPelan
         final int position = p;
         holder.txtNamaPelanggan.setText(pelanggans.get(position).getNamaPelanggan());
         holder.txtAlamatPelanggan.setText(pelanggans.get(position).getAlamatPelanggan());
+
+        holder.imageViewEditPelanggan.setOnClickListener(v -> {
+            Intent i = new Intent(context, UbahPelangganAppActivity.class);
+            i.putExtra("idPelanggan", pelanggans.get(position).getIdPelanggan());
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.getApplicationContext().startActivity(i);
+        });
 
         holder.btnPilihPelanggan.setOnClickListener(v -> updatePelanggan(pelanggans.get(position).getIdPelanggan()));
 
@@ -96,6 +105,7 @@ public class ListUbahPelangganAdapter extends RecyclerView.Adapter<ListUbahPelan
         TextView txtNamaPelanggan;
         TextView txtAlamatPelanggan;
         Button btnPilihPelanggan, btnPreferensi;
+        ImageView imageViewEditPelanggan;
 
         public MyViewHolder(View view) {
             super(view);
@@ -104,6 +114,7 @@ public class ListUbahPelangganAdapter extends RecyclerView.Adapter<ListUbahPelan
             txtAlamatPelanggan = (TextView) view.findViewById(R.id.alamatPelanggan);
             btnPilihPelanggan = (Button) view.findViewById(R.id.btnPilihPelanggan);
             btnPreferensi = (Button) view.findViewById(R.id.btnPreferensi);
+            imageViewEditPelanggan = (ImageView) view.findViewById(R.id.imageView_editPelanggan);
 
         }
     }

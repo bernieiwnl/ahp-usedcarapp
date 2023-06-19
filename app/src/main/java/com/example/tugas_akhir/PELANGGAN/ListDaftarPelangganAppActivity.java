@@ -1,6 +1,7 @@
 package com.example.tugas_akhir.PELANGGAN;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,6 +61,8 @@ public class ListDaftarPelangganAppActivity extends AppCompatActivity implements
 
         //fetch data
         fetchData();
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerViewPelanggan.addItemDecoration(dividerItemDecoration);
 
         //setOnclick
         imgViewTambahPelanggan.setOnClickListener(this);
