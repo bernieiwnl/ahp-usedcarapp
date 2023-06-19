@@ -1,6 +1,8 @@
 package com.example.tugas_akhir.MOBIL.MASTER.ADAPTER;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,15 @@ public class KeadaanBodyAppAdapter extends RecyclerView.Adapter<KeadaanBodyAppAd
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtKeadaanBody.setText(keadaanMobil.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.putExtra("keadaanMobil", keadaanMobil.get(position));
+                ((Activity) context).setResult(Activity.RESULT_OK, i);
+                ((Activity) context).finish();
+            }
+        });
     }
 
     @Override

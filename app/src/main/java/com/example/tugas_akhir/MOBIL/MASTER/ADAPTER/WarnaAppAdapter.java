@@ -1,6 +1,8 @@
 package com.example.tugas_akhir.MOBIL.MASTER.ADAPTER;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,12 @@ public class WarnaAppAdapter extends RecyclerView.Adapter<WarnaAppAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtWarnaMobil.setText(warnaMobil.get(position));
-
+        holder.itemView.setOnClickListener(v -> {
+            Intent i = new Intent();
+            i.putExtra("warnaMobil", warnaMobil.get(position));
+            ((Activity) context).setResult(Activity.RESULT_OK, i);
+            ((Activity) context).finish();
+        });
     }
 
     @Override

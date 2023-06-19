@@ -9,30 +9,53 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.ADAPTER.FotoMobilAdapter;
+import com.example.tugas_akhir.ADDATA_MOBIL.AddDataMobilActivity;
 import com.example.tugas_akhir.MOBIL.MASTER.ADAPTER.KeadaanBodyAppAdapter;
 import com.example.tugas_akhir.MOBIL.MASTER.ListKeadaanBodyAppActivity;
 import com.example.tugas_akhir.MOBIL.MASTER.ListKelengkapanAppActivity;
 import com.example.tugas_akhir.MOBIL.MASTER.ListWarnaAppActivity;
 import com.example.tugas_akhir.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class TambahMobilAppActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+
+    private FirebaseFirestore firebaseFirestore;
+    private StorageReference storageReference;
+    private StorageTask storageTask;
 
     private TextInputEditText txtInputWarna,
             txtInputKeadaanMobil,
@@ -69,19 +92,35 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
     private RadioButton radioButtonInteriorAsli, radioButtonInteriorTidakAsli;
     private String txtKondisiInterior;
 
+    //button
     private Button btnTambahFoto;
+
+    //imageView
+    private ImageView imageViewSimpanMobil;
+    private ImageView imageViewBack;
+
+    //Recylerview
     private RecyclerView recyclerView_fotoMobil;
+
+    //adapter
     private FotoMobilAdapter fotoMobilAdapter;
 
+    //arraylist
     private ArrayList<Bitmap> fileImageList;
     private ArrayList<Uri> fileUriList;
 
     private static final int RESULT_LOAD_IMAGE1 = 1;
+    private static final int RESULT_WARNA_MOBIL = 2;
+    private static final int RESULT_KEADAAN_MOBIL = 3;
+    private static final int RESULT_KELENGKAPAN_MOBIL = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_mobil_app);
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         //Text input editext
         txtInputWarna = (TextInputEditText) findViewById(R.id.inputWarnaMobil);
@@ -140,6 +179,10 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
         //Button
         btnTambahFoto = (Button) findViewById(R.id.btnTambahFoto);
 
+        //Imageview
+        imageViewBack = (ImageView) findViewById(R.id.imageView_back);
+        imageViewSimpanMobil = (ImageView) findViewById(R.id.imageView_tambahMobil);
+
         //Array List untuk meyimpan sementara gambar yang diupload
         fileImageList = new ArrayList<>();
         fileUriList = new ArrayList<>();
@@ -149,6 +192,7 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
         txtInputKelengkapanMobil.setOnClickListener(this);
         txtInputKeadaanMobil.setOnClickListener(this);
         btnTambahFoto.setOnClickListener(this);
+        imageViewSimpanMobil.setOnClickListener(this);
 
         //setAdapter
         fotoMobilAdapter = new FotoMobilAdapter(fileImageList, TambahMobilAppActivity.this);
@@ -185,15 +229,15 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.inputWarnaMobil: {
-                startActivity(new Intent(TambahMobilAppActivity.this, ListWarnaAppActivity.class));
+                startActivityForResult(new Intent(TambahMobilAppActivity.this, ListWarnaAppActivity.class), RESULT_WARNA_MOBIL);
                 break;
             }
             case R.id.inputKelengkapanMobil: {
-                startActivity(new Intent(TambahMobilAppActivity.this, ListKelengkapanAppActivity.class));
+                startActivityForResult(new Intent(TambahMobilAppActivity.this, ListKelengkapanAppActivity.class), RESULT_KELENGKAPAN_MOBIL);
                 break;
             }
             case R.id.inputKeadaanBodyMobil: {
-                startActivity(new Intent(TambahMobilAppActivity.this, ListKeadaanBodyAppActivity.class));
+                startActivityForResult(new Intent(TambahMobilAppActivity.this, ListKeadaanBodyAppActivity.class), RESULT_KEADAAN_MOBIL);
                 break;
             }
             case R.id.btnTambahFoto: {
@@ -208,6 +252,15 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+                break;
+            }
+            case R.id.imageView_tambahMobil: {
+                simpanDataMobil();
+                break;
+            }
+            case R.id.imageView_back: {
+                finish();
+                break;
             }
         }
     }
@@ -242,7 +295,17 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                         e.printStackTrace();
                     }
                 }
+            } else if (requestCode == RESULT_WARNA_MOBIL && resultCode == RESULT_OK) {
+                String warnaMobil = data.getStringExtra("warnaMobil");
+                txtInputWarna.setText(warnaMobil);
+            } else if (requestCode == RESULT_KEADAAN_MOBIL && resultCode == RESULT_OK) {
+                String keadaanMobil = data.getStringExtra("keadaanMobil");
+                txtInputKeadaanMobil.setText(keadaanMobil);
+            } else if (requestCode == RESULT_KELENGKAPAN_MOBIL && resultCode == RESULT_OK) {
+                String kelengkapanMobil = data.getStringExtra("kelengkapanMobil");
+                txtInputKelengkapanMobil.setText(kelengkapanMobil);
             }
+
         } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -310,4 +373,117 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
             }
         }
     }
+
+    //ambil nama pada data foto yang dipilih
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    private void uploadFotoMobil(final String id) {
+        try {
+            if (fileUriList.isEmpty()) {
+                return;
+            }
+            //call time
+            long current = Calendar.getInstance().getTimeInMillis();
+            Integer data = 0;
+            for (int i = 0; i < fileUriList.size(); i++) {
+                String fileName = getFileName(fileUriList.get(i));
+                final StorageReference fileToUpload = storageReference.child("foto_mobil").child(fileName + current + "_" + id + "_" + i);
+                storageTask = fileToUpload.putFile(fileUriList.get(i));
+                storageTask.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileToUpload.getDownloadUrl();
+                }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        String mUri = downloadUri.toString();
+                        firebaseFirestore.collection("mobil").document(id).update("fotoMobil", FieldValue.arrayUnion(mUri)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                fotoMobilAdapter.notifyDataSetChanged();
+                                Toast.makeText(TambahMobilAppActivity.this,
+                                        "Upload foto mobil berhasil", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        fotoMobilAdapter.notifyDataSetChanged();
+                        Toast.makeText(TambahMobilAppActivity.this,
+                                "Upload foto mobil gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                data++;
+            }
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void simpanDataMobil() {
+        try {
+            Map<String, Object> mobil = new HashMap<>();
+            mobil.put("idMobil", "");
+            mobil.put("namaMerkMobil", txtInputNamaMerkMobil.getText().toString().trim());
+            mobil.put("tipeMobil", txtTipeMobil);
+            mobil.put("transmisiMobil", txtTransmisiMobil);
+            mobil.put("tahunMobil", txtInputTahunMobil.getText().toString().trim());
+            mobil.put("kilometerMobil", txtInputKilometerMobil.getText().toString().trim());
+            mobil.put("warnaMobil", txtInputWarna.getText().toString().trim());
+            mobil.put("kapasitasMobil", txtInputKapasitasMesinMobil.getText().toString().trim());
+            mobil.put("hargaMobil", txtInputHargaMobil.getText().toString().trim());
+            mobil.put("sejarahMobil", txtInputSejarahMobil.getText().toString().trim());
+            mobil.put("kondisiMesinMobil", txtKondisiMesin);
+            mobil.put("serviceRecordMobil", txtServiceMobil);
+            mobil.put("kondisiInteriorMobil", txtKondisiInterior);
+            mobil.put("keadaanMobil", txtInputKeadaanMobil.getText().toString().trim());
+            mobil.put("kelengkapanMobil", txtInputKelengkapanMobil.getText().toString().trim());
+
+            firebaseFirestore.collection("mobil").add(mobil).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentReference> task) {
+                    if (task.isSuccessful()) {
+                        firebaseFirestore.collection("mobil").document(task.getResult().getId()).update("idMobil", task.getResult().getId()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getApplicationContext(), "Tambah Mobil Sukses", Toast.LENGTH_SHORT).show();
+                                uploadFotoMobil(task.getResult().getId());
+                                finish();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Tambah Mobil Gagal", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            });
+
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
