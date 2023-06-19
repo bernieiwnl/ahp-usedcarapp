@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/namaPelanggan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/txtNamaPelanggan"
         android:layout_marginTop="5dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
         android:text="Agustian Suhartono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TextView>
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView_editPelanggan"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:tint="#000000" />
 
     <TextView
         android:id="@+id/txtAlamatPelanggan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/namaPelanggan"
         android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:textStyle="bold"
-        android:textColor="#000000"
         android:text="Alamat"
+        android:textColor="#000000"
         android:textSize="14sp"
-        android:layout_height="wrap_content">
-    </TextView>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/alamatPelanggan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/txtAlamatPelanggan"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:textSize="13sp"
-        android:textColor="#000000"
         android:text="Jl. Surabaya 12 50 100 20"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TextView>
+        android:textColor="#000000"
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/btnPilihPelanggan"
@@ -65,13 +69,11 @@
         android:layout_marginStart="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:textAllCaps="false"
         android:backgroundTint="@color/colorButton"
         android:text="Preferensi"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="12sp" />
-
-
 
 
 </RelativeLayout>
