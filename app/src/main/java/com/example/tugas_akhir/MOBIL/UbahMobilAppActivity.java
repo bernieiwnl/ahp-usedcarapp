@@ -1,15 +1,20 @@
 package com.example.tugas_akhir.MOBIL;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,17 +27,27 @@ import com.example.tugas_akhir.ADAPTER.EditFotoMobilAdapter;
 import com.example.tugas_akhir.ADAPTER.FotoMobilAdapter;
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.MOBIL.CLASS.NewMobil;
+import com.example.tugas_akhir.MOBIL.MASTER.ListKeadaanBodyAppActivity;
+import com.example.tugas_akhir.MOBIL.MASTER.ListKelengkapanAppActivity;
+import com.example.tugas_akhir.MOBIL.MASTER.ListWarnaAppActivity;
 import com.example.tugas_akhir.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +55,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UbahMobilAppActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
@@ -187,24 +205,306 @@ public class UbahMobilAppActivity extends AppCompatActivity implements View.OnCl
         imageViewSimpanMobil.setOnClickListener(this);
         imageViewBack.setOnClickListener(this);
 
+        fetchDataFoto(RESULT_ID_MOBIL);
+        fetchData(RESULT_ID_MOBIL);
+
         //setAdapter
         fotoMobilAdapter = new EditFotoMobilAdapter(UbahMobilAppActivity.this, fileImageList);
         recyclerView_fotoMobil.setAdapter(fotoMobilAdapter);
         recyclerView_fotoMobil.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_fotoMobil.setNestedScrollingEnabled(false);
 
-        fetchData(RESULT_ID_MOBIL);
 
+        //swipe up and down / left or right
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemCallBack);
+        itemTouchHelper.attachToRecyclerView(recyclerView_fotoMobil);
     }
+
+    ItemTouchHelper.SimpleCallback itemCallBack = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            try {
+                hapusFotoMobil(RESULT_ID_MOBIL, viewHolder.getAdapterPosition());
+            } catch (Exception e) {
+                Log.e("ErrorMsg", e.getMessage());
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.inputWarnaMobil: {
+                startActivityForResult(new Intent(UbahMobilAppActivity.this, ListWarnaAppActivity.class), RESULT_WARNA_MOBIL);
+                break;
+            }
+            case R.id.inputKelengkapanMobil: {
+                startActivityForResult(new Intent(UbahMobilAppActivity.this, ListKelengkapanAppActivity.class), RESULT_KELENGKAPAN_MOBIL);
+                break;
+            }
+            case R.id.inputKeadaanBodyMobil: {
+                startActivityForResult(new Intent(UbahMobilAppActivity.this, ListKeadaanBodyAppActivity.class), RESULT_KEADAAN_MOBIL);
+                break;
+            }
+            case R.id.btnTambahFoto: {
+                try {
+                    //Klik button to open galery
+                    Intent i = new Intent();
+                    i.setType("image/*");
+                    i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    i.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(i, "Select Picture"), RESULT_LOAD_IMAGE1);
+                } catch (Exception e) {
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case R.id.imageView_tambahMobil: {
+                updateDataMobil(RESULT_ID_MOBIL);
+                break;
+            }
+            case R.id.imageView_back: {
+                finish();
+                break;
+            }
+        }
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == RESULT_LOAD_IMAGE1 && resultCode == RESULT_OK) {
+                fileUriList.clear();
+                if (data.getClipData() != null) {
+                    int totalItemSelected = data.getClipData().getItemCount();
+                    for (int i = 0; i < totalItemSelected; i++) {
+                        Uri fileUri = data.getClipData().getItemAt(i).getUri();
+                        Bitmap bitmap = null;
+                        try {
+                            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
+                            fileUriList.add(fileUri);
+                            uploadFotoMobil(RESULT_ID_MOBIL);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else if (data.getData() != null) {
+                    Uri fileUri = data.getData();
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
+                        fileUriList.add(fileUri);
+                        uploadFotoMobil(RESULT_ID_MOBIL);
+                        fotoMobilAdapter.notifyDataSetChanged();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (requestCode == RESULT_WARNA_MOBIL && resultCode == RESULT_OK) {
+                String warnaMobil = data.getStringExtra("warnaMobil");
+                txtInputWarna.setText(warnaMobil);
+            } else if (requestCode == RESULT_KEADAAN_MOBIL && resultCode == RESULT_OK) {
+                String keadaanMobil = data.getStringExtra("keadaanMobil");
+                txtInputKeadaanMobil.setText(keadaanMobil);
+            } else if (requestCode == RESULT_KELENGKAPAN_MOBIL && resultCode == RESULT_OK) {
+                String kelengkapanMobil = data.getStringExtra("kelengkapanMobil");
+                txtInputKelengkapanMobil.setText(kelengkapanMobil);
+            }
+
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.tipeSUV: {
+                txtTipeMobil = "SUV";
+                break;
+            }
+            case R.id.tipeHatchBack: {
+                txtTipeMobil = "Hatchback";
+                break;
+            }
+            case R.id.tipeSedan: {
+                txtTipeMobil = "Sedan";
+                break;
+            }
+            case R.id.transmisiAutomatic: {
+                txtTransmisiMobil = "Matic";
+                break;
+            }
+            case R.id.transmisiManual: {
+                txtTransmisiMobil = "Manual";
+                break;
+            }
+            case R.id.transmisiKeduanya: {
+                txtTransmisiMobil = "Keduanya";
+                break;
+            }
+            case R.id.kondisiMesinHalus: {
+                txtKondisiMesin = "Suara Mesin Halus";
+                break;
+            }
+            case R.id.kondisiMesinKasar: {
+                txtKondisiMesin = "Suara Mesin Kasar";
+                break;
+            }
+            case R.id.serviceRutin: {
+                txtServiceMobil = "Rutin";
+                break;
+            }
+            case R.id.serviceTerkadang: {
+                txtServiceMobil = "Terkadang";
+                break;
+            }
+            case R.id.serviceJarang: {
+                txtServiceMobil = "Jarang";
+                break;
+            }
+            case R.id.serviceTidakPernah: {
+                txtServiceMobil = "Tidak Pernah";
+                break;
+            }
+            case R.id.interiorAsli: {
+                txtKondisiInterior = "Interior Asli";
+                break;
+            }
+            case R.id.interiorTidakAsli: {
+                txtKondisiInterior = "Interior Palsu";
+                break;
+            }
+        }
+    }
 
+    //ambil nama pada data foto yang dipilih
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    private void uploadFotoMobil(final String id) {
+        try {
+            if (fileUriList.isEmpty()) {
+                return;
+            }
+            //call time
+            long current = Calendar.getInstance().getTimeInMillis();
+            Integer data = 0;
+            for (int i = 0; i < fileUriList.size(); i++) {
+                String fileName = getFileName(fileUriList.get(i));
+                final StorageReference fileToUpload = storageReference.child("foto_mobil").child(fileName + current + "_" + id + "_" + i);
+                storageTask = fileToUpload.putFile(fileUriList.get(i));
+                storageTask.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileToUpload.getDownloadUrl();
+                }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        String mUri = downloadUri.toString();
+                        firebaseFirestore.collection("mobil").document(id).update("fotoMobil", FieldValue.arrayUnion(mUri)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                fotoMobilAdapter.notifyDataSetChanged();
+                                Toast.makeText(UbahMobilAppActivity.this,
+                                        "Upload foto mobil berhasil", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        fotoMobilAdapter.notifyDataSetChanged();
+                        Toast.makeText(UbahMobilAppActivity.this,
+                                "Upload foto mobil gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                data++;
+            }
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void hapusFotoMobil(String idMobil, Integer position) {
+        try {
+            String fotoMobilUrl = fileImageList.get(position);
+            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+            FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+            StorageReference storageReference = firebaseStorage.getReferenceFromUrl(fileImageList.get(position));
+            CollectionReference collectionReference = firebaseFirestore.collection("mobil");
+            DocumentReference mobilDb = collectionReference.document(idMobil);
+
+            storageReference.delete().addOnSuccessListener(unused -> {
+                mobilDb.update("fotoMobil", FieldValue.arrayRemove(fotoMobilUrl)).addOnSuccessListener(unused1 -> {
+                    fotoMobilAdapter.notifyItemRangeChanged(position, fotoMobilAdapter.getItemCount());
+                    Toast.makeText(getApplicationContext(), "Foto Mobil berhasil dihapus", Toast.LENGTH_SHORT).show();
+                });
+            });
+
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void fetchDataFoto(String idMobil) {
+        try {
+            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+            CollectionReference collectionReference = firebaseFirestore.collection("mobil");
+            DocumentReference mobilDb = collectionReference.document(idMobil);
+
+            mobilDb.addSnapshotListener((documentSnapshot, error) -> {
+                if (error != null) {
+                    Log.e("ErrorMsg", error.getMessage());
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (documentSnapshot == null && !documentSnapshot.exists()) {
+                    return;
+                }
+                fileImageList.clear();
+                NewMobil mobil = documentSnapshot.toObject(NewMobil.class);
+                fileImageList.addAll(mobil.getFotoMobil());
+                fotoMobilAdapter.notifyDataSetChanged();
+            });
+
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -221,8 +521,6 @@ public class UbahMobilAppActivity extends AppCompatActivity implements View.OnCl
                 }
 
                 NewMobil mobil = documentSnapshot.toObject(NewMobil.class);
-                fileImageList.addAll(mobil.getFotoMobil());
-                fotoMobilAdapter.notifyDataSetChanged();
 
                 txtInputNamaMerkMobil.setText(mobil.getNamaMerkMobil());
                 txtTipeMobil = mobil.getTipeMobil();
@@ -302,4 +600,38 @@ public class UbahMobilAppActivity extends AppCompatActivity implements View.OnCl
         }
 
     }
+
+    private void updateDataMobil(String idMobil) {
+        try {
+            Map<String, Object> mobil = new HashMap<>();
+            mobil.put("namaMerkMobil", txtInputNamaMerkMobil.getText().toString().trim());
+            mobil.put("tipeMobil", txtTipeMobil);
+            mobil.put("transmisiMobil", txtTransmisiMobil);
+            mobil.put("tahunMobil", Integer.parseInt(txtInputTahunMobil.getText().toString().trim()));
+            mobil.put("kilometerMobil", Integer.parseInt(txtInputKilometerMobil.getText().toString().trim()));
+            mobil.put("warnaMobil", txtInputWarna.getText().toString().trim());
+            mobil.put("kapasitasMobil", Integer.parseInt(txtInputKapasitasMesinMobil.getText().toString().trim()));
+            mobil.put("hargaMobil", Integer.parseInt(txtInputHargaMobil.getText().toString().trim()));
+            mobil.put("sejarahMobil", txtInputSejarahMobil.getText().toString().trim());
+            mobil.put("kondisiMesinMobil", txtKondisiMesin);
+            mobil.put("serviceRecordMobil", txtServiceMobil);
+            mobil.put("kondisiInteriorMobil", txtKondisiInterior);
+            mobil.put("keadaanMobil", txtInputKeadaanMobil.getText().toString().trim());
+            mobil.put("kelengkapanMobil", txtInputKelengkapanMobil.getText().toString().trim());
+
+            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+            CollectionReference collectionReference = firebaseFirestore.collection("mobil");
+            DocumentReference mobilDb = collectionReference.document(idMobil);
+
+            mobilDb.update(mobil).addOnSuccessListener(unused -> {
+                Toast.makeText(getApplicationContext(), "Data mobil berhasil di ubah", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+
+        } catch (Exception e) {
+            Log.e("ErrorMsg", e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
