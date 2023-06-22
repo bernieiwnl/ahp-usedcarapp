@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class NewMobil {
     private ArrayList<String> fotoMobil;
+    private String idMobil;
     private String namaMerkMobil;
     private String tipeMobil;
     private String transmisiMobil;
@@ -23,7 +24,8 @@ public class NewMobil {
 
     }
 
-    public NewMobil(ArrayList<String> fotoMobil, String namaMerkMobil, String tipeMobil, String transmisiMobil, Integer tahunMobil, Integer kilometerMobil, String warnaMobil, Integer kapasitasMobil, Integer hargaMobil, String sejarahMobil, String kondisiMesinMobil, String serviceRecordMobil, String kondisiInteriorMobil, String keadaanMobil, String kelengkapanMobil) {
+    public NewMobil(ArrayList<String> fotoMobil, String namaMerkMobil, String tipeMobil, String transmisiMobil, Integer tahunMobil, Integer kilometerMobil, String warnaMobil, Integer kapasitasMobil, Integer hargaMobil, String sejarahMobil, String kondisiMesinMobil, String serviceRecordMobil, String kondisiInteriorMobil, String keadaanMobil, String kelengkapanMobil, String idMobil) {
+        this.setIdMobil(idMobil);
         this.setFotoMobil(fotoMobil);
         this.setNamaMerkMobil(namaMerkMobil);
         this.setTipeMobil(tipeMobil);
@@ -160,5 +162,13 @@ public class NewMobil {
 
     public void setServiceRecordMobil(String serviceRecordMobil) {
         this.serviceRecordMobil = serviceRecordMobil;
+    }
+
+    public String getIdMobil() {
+        return idMobil;
+    }
+
+    public void setIdMobil(String idMobil) {
+        this.idMobil = idMobil;
     }
 }

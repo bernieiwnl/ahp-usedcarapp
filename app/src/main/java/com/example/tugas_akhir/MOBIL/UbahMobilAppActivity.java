@@ -121,7 +121,7 @@ public class UbahMobilAppActivity extends AppCompatActivity implements View.OnCl
     private static final int RESULT_WARNA_MOBIL = 2;
     private static final int RESULT_KEADAAN_MOBIL = 3;
     private static final int RESULT_KELENGKAPAN_MOBIL = 4;
-    private static final String RESULT_ID_MOBIL = "p7junUOjy64Jz49sWedJ";
+    private String RESULT_ID_MOBIL;
 
 
     @Override
@@ -131,6 +131,8 @@ public class UbahMobilAppActivity extends AppCompatActivity implements View.OnCl
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        RESULT_ID_MOBIL = (String) getIntent().getStringExtra("idMobil");
 
         //Text input editext
         txtInputWarna = (TextInputEditText) findViewById(R.id.inputWarnaMobil);

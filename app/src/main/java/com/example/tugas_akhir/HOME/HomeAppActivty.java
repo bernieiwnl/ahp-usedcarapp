@@ -105,7 +105,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.daftarMobilCardView: {
                 try {
-                    startActivity(new Intent(HomeAppActivty.this, UbahMobilAppActivity.class));
+                    startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
 //                    startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
                 } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
