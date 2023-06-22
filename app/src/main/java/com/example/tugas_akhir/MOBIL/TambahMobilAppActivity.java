@@ -341,11 +341,11 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                 break;
             }
             case R.id.kondisiMesinHalus: {
-                txtKondisiMesin = "Suara Mesin Kasar";
+                txtKondisiMesin = "Suara Mesin Halus";
                 break;
             }
             case R.id.kondisiMesinKasar: {
-                txtKondisiMesin = "Suara Mesin Halus";
+                txtKondisiMesin = "Suara Mesin Kasar";
                 break;
             }
             case R.id.serviceRutin: {
