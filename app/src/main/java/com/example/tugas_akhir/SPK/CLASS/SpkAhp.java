@@ -6,7 +6,7 @@ public class SpkAhp {
 
     }
 
-    public static double[] hitungAHP(double[] matrix) {
+    public double[] hitungAHP(double[] matrix) {
         double[] vectorEigen = new double[matrix.length];
 
         //buat pairWisComparison
@@ -162,6 +162,19 @@ public class SpkAhp {
             bobotTransmisiMobil = 1.0;
         }
         return bobotTransmisiMobil;
+    }
+
+    public double bobotKilometer(int kilometer, int tahun) {
+        int kilometerMobil = kilometer / (2023 - tahun);
+        double bobotKilometerMobil = 0.0;
+        if (kilometerMobil < 10000) {
+            bobotKilometerMobil = 3.0;
+        } else if (kilometerMobil <= 20000 & kilometerMobil >= 10000) {
+            bobotKilometerMobil = 2.0;
+        } else if (kilometerMobil > 20001) {
+            bobotKilometerMobil = 1.0;
+        }
+        return bobotKilometerMobil;
     }
 
     public double bobotKeadaanBody(String keadaanBody) {

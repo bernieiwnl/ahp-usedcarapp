@@ -93,9 +93,9 @@ public class RekomendasiAlternatifActivity extends AppCompatActivity {
         recyclerView_rekomendasi.setNestedScrollingEnabled(false);
 
         int index = 0;
-        for(Mobil alternatif : arrayList_mobil){
-            for(PrefKriteria kriteria : arrayList_kriteria){
-                switch (kriteria.getNama_kriteria()){
+        for (Mobil alternatif : arrayList_mobil) {
+            for (PrefKriteria kriteria : arrayList_kriteria) {
+                switch (kriteria.getNama_kriteria()) {
                     case "Kapasitas Mesin":
                         double kapasitasMesin = ahp.nilaiKapasitasMesin(Integer.parseInt(alternatif.getKapasitas_mesin()));
                         arrayKapasitasMesin[index] = kapasitasMesin;
@@ -157,8 +157,8 @@ public class RekomendasiAlternatifActivity extends AppCompatActivity {
             index++;
         }
         //check fungsi ahp untuk tiap kriteria yang dipilih oleh user
-        for(PrefKriteria kriteria : arrayList_kriteria){
-            switch (kriteria.getNama_kriteria()){
+        for (PrefKriteria kriteria : arrayList_kriteria) {
+            switch (kriteria.getNama_kriteria()) {
                 case "Kapasitas Mesin":
                     arrayKapasitasMesin = ahp.metodeAHP(arrayKapasitasMesin);
                     break;
@@ -199,13 +199,13 @@ public class RekomendasiAlternatifActivity extends AppCompatActivity {
         daftarRekomendasiMobilAdapter = new DaftarRekomendasiMobilAdapter(RekomendasiAlternatifActivity.this, arrayList_rekomendasi);
         recyclerView_rekomendasi.setAdapter(daftarRekomendasiMobilAdapter);
     }
-    
-    void checkRekomendasiMobil(){
-        for(int i = 0; i < arrayList_mobil.size(); i++){
+
+    void checkRekomendasiMobil() {
+        for (int i = 0; i < arrayList_mobil.size(); i++) {
             double nilai = 0.0;
             Mobil dataMobil = arrayList_mobil.get(i);
-            for(PrefKriteria kriteria : arrayList_kriteria){
-                switch (kriteria.getNama_kriteria()){
+            for (PrefKriteria kriteria : arrayList_kriteria) {
+                switch (kriteria.getNama_kriteria()) {
                     case "Kapasitas Mesin":
                         nilai = nilai + (arrayKapasitasMesin[i] * kriteria.getBobot_kriteria());
                         break;

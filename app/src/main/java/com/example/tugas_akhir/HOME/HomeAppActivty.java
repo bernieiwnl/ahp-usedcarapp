@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.CLASS.Firestore;
+import com.example.tugas_akhir.CLASS.PrefKriteria;
+import com.example.tugas_akhir.CLASS.Preferensi;
 import com.example.tugas_akhir.LOGIN.LoginActivity;
 import com.example.tugas_akhir.MOBIL.ListDaftarMobilAppActivity;
 import com.example.tugas_akhir.MOBIL.TambahMobilAppActivity;
@@ -28,11 +30,15 @@ import com.example.tugas_akhir.REGISTER.RegisterAppActivity;
 import com.example.tugas_akhir.SPK.DaftarAlternatiflAppActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeAppActivty extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +49,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
     private String getCurrentUserUid, getIdPelanggan;
     private TextView txtViewNamaUser, txtViewUbahPelanggan, txtViewNamaPelanggan, txtViewAlamatPelanggan;
     private CardView cardViewDaftarPelanggan, cardViewDaftarMobil, cardViewRekomendasi;
+    private ArrayList<PrefKriteria> prefKriterias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +72,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
 
         //fetch data
         fetchData();
+
         //set OnClick
         txtViewUbahPelanggan.setOnClickListener(this);
         btnPreferensiPelanggan.setOnClickListener(this);
@@ -97,6 +105,27 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             }
+            case R.id.daftarMobilCardView: {
+                try {
+                    startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
+                } catch (Exception e) {
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case R.id.rekomendasiCardView: {
+                try {
+                    Intent intent = new Intent(HomeAppActivty.this, DaftarAlternatiflAppActivity.class);
+                    intent.putExtra("idPelanggan", getIdPelanggan);
+                    startActivityForResult(intent, 1);
+
+                } catch (Exception e) {
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
             case R.id.daftarPelangganCardView: {
                 try {
                     startActivity(new Intent(HomeAppActivty.this, ListPelangganAppActivity.class));
@@ -105,23 +134,6 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 break;
-            }
-            case R.id.daftarMobilCardView: {
-                try {
-                    startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
-//                    startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
-                } catch (Exception e) {
-                    Log.e("ErrorMsg", e.getMessage());
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-            case R.id.rekomendasiCardView: {
-                try {
-                    startActivity(new Intent(HomeAppActivty.this, DaftarAlternatiflAppActivity.class));
-                } catch (Exception e) {
-                    Log.e("ErrorMsg", e.getMessage());
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
             }
         }
     }

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SPK.DaftarRekomendasiMobilAppActivity"
+            android:exported="true" />
+        <activity
             android:name=".SPK.DaftarPilihanAlternatifAppActivity"
             android:exported="true" />
         <activity
