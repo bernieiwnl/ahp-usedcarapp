@@ -50,7 +50,6 @@ public class ListPreferensiPelangganAppActivity extends AppCompatActivity {
             preferensis.add("Kondisi Mesin");
             preferensis.add("Kapasitas Mesin");
             preferensis.add("Kondisi Body");
-            preferensis.add("Kondisi Ban");
             preferensis.add("Warna");
             preferensis.add("Kelengkapan");
             preferensis.add("Kondisi Interior");

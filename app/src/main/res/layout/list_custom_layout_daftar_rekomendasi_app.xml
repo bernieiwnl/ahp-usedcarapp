@@ -56,16 +56,32 @@
                     android:orientation="vertical"
                     android:padding="12dp">
 
-                    <Button
-                        android:id="@+id/btnPilihAlt"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/colorButton"
-                        android:text="Pilih Mobil"
-                        android:textAllCaps="false"
-                        android:textColor="#ffffff"
-                        android:textSize="12sp" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/imageView_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/ic_baseline_star_rate_24"
+                            app:tint="#FFC107" />
+
+                        <TextView
+                            android:id="@+id/textView_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_toRightOf="@id/imageView_rate"
+                            android:text="Rate Nilai"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"

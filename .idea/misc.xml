@@ -13,10 +13,11 @@
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_add_data_mobil.xml" value="0.22175925925925927" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_add_detail_mobil.xml" value="0.18055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_alternatif.xml" value="0.33055555555555555" />
-        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_alternatif_app.xml" value="0.22361111111111112" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_alternatif_app.xml" value="0.33" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_mobil_user.xml" value="0.33055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_pilihan_alternatif_app.xml" value="0.2111111111111111" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_rekomendasi_mobil_app.xml" value="0.18" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_daftar_rekomendasi_mobil_app_adapter.xml" value="0.17731481481481481" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_detail_mobil.xml" value="0.32222222222222224" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/activity_home_app.xml" value="0.25" />
@@ -57,10 +58,12 @@
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/custom_list_tipe_mobil.xml" value="0.32222222222222224" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_daftar_mobilapp.xml" value="0.23148148148148148" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_data_mobil.xml" value="0.22" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout.xml" value="0.18055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_alternatif_mobil_app.xml" value="0.33" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftar_alternatif.xml" value="0.33" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftar_mobil.xml" value="0.33055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftar_rekomendasi.xml" value="0.33" />
+        <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftar_rekomendasi_app.xml" value="0.22" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftar_user_mobil.xml" value="0.33055555555555555" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftarkriteria.xml" value="0.1" />
         <entry key="..\:/Freelance/160416136_dicsut_ta/160416136_dicsut_ta/app/src/main/res/layout/list_custom_layout_daftarpreferensi.xml" value="0.1" />
