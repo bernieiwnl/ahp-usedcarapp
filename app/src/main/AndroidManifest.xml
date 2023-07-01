@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SPK.DaftarPilihanAlternatifAppActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SPK.DaftarAlternatiflAppActivity"
+            android:exported="true" />
+        <activity
             android:name=".MOBIL.DetailMobilAppActivity"
             android:exported="true" />
         <activity

@@ -1,8 +1,9 @@
 package com.example.tugas_akhir.MOBIL.CLASS;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class NewMobil {
+public class NewMobil implements Serializable {
     private ArrayList<String> fotoMobil;
     private String idMobil;
     private String namaMerkMobil;

@@ -448,11 +448,11 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
             mobil.put("namaMerkMobil", txtInputNamaMerkMobil.getText().toString().trim());
             mobil.put("tipeMobil", txtTipeMobil);
             mobil.put("transmisiMobil", txtTransmisiMobil);
-            mobil.put("tahunMobil", txtInputTahunMobil.getText().toString().trim());
-            mobil.put("kilometerMobil", txtInputKilometerMobil.getText().toString().trim());
+            mobil.put("tahunMobil", Integer.parseInt(txtInputTahunMobil.getText().toString().trim()));
+            mobil.put("kilometerMobil", Integer.parseInt(txtInputKilometerMobil.getText().toString().trim()));
             mobil.put("warnaMobil", txtInputWarna.getText().toString().trim());
-            mobil.put("kapasitasMobil", txtInputKapasitasMesinMobil.getText().toString().trim());
-            mobil.put("hargaMobil", txtInputHargaMobil.getText().toString().trim());
+            mobil.put("kapasitasMobil", Integer.parseInt(txtInputKapasitasMesinMobil.getText().toString().trim()));
+            mobil.put("hargaMobil", Integer.parseInt(txtInputHargaMobil.getText().toString().trim()));
             mobil.put("sejarahMobil", txtInputSejarahMobil.getText().toString().trim());
             mobil.put("kondisiMesinMobil", txtKondisiMesin);
             mobil.put("serviceRecordMobil", txtServiceMobil);

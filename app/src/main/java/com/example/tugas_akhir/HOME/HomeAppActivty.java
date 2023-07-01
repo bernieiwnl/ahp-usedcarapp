@@ -25,6 +25,7 @@ import com.example.tugas_akhir.PELANGGAN.ListPelangganAppActivity;
 import com.example.tugas_akhir.PELANGGAN.PREFERENSI.UbahPreferensiPelangganAppActivity;
 import com.example.tugas_akhir.R;
 import com.example.tugas_akhir.REGISTER.RegisterAppActivity;
+import com.example.tugas_akhir.SPK.DaftarAlternatiflAppActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,7 +42,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
     private DocumentReference userDb;
     private String getCurrentUserUid, getIdPelanggan;
     private TextView txtViewNamaUser, txtViewUbahPelanggan, txtViewNamaPelanggan, txtViewAlamatPelanggan;
-    private CardView cardViewDaftarPelanggan, cardViewDaftarMobil;
+    private CardView cardViewDaftarPelanggan, cardViewDaftarMobil, cardViewRekomendasi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         //cardview
         cardViewDaftarPelanggan = (CardView) findViewById(R.id.daftarPelangganCardView);
         cardViewDaftarMobil = (CardView) findViewById(R.id.daftarMobilCardView);
+        cardViewRekomendasi = (CardView) findViewById(R.id.rekomendasiCardView);
 
         //button
         btnPreferensiPelanggan = (Button) findViewById(R.id.btnPreferensi);
@@ -68,6 +70,7 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
         btnPreferensiPelanggan.setOnClickListener(this);
         cardViewDaftarPelanggan.setOnClickListener(this);
         cardViewDaftarMobil.setOnClickListener(this);
+        cardViewRekomendasi.setOnClickListener(this);
 
     }
 
@@ -107,6 +110,14 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
                 try {
                     startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
 //                    startActivity(new Intent(HomeAppActivty.this, ListDaftarMobilAppActivity.class));
+                } catch (Exception e) {
+                    Log.e("ErrorMsg", e.getMessage());
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            case R.id.rekomendasiCardView: {
+                try {
+                    startActivity(new Intent(HomeAppActivty.this, DaftarAlternatiflAppActivity.class));
                 } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
