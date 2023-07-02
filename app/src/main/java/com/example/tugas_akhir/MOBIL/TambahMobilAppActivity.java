@@ -435,6 +435,7 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                 });
                 data++;
             }
+            finish();
         } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -469,7 +470,6 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                             public void onSuccess(Void unused) {
                                 Toast.makeText(getApplicationContext(), "Tambah Mobil Sukses", Toast.LENGTH_SHORT).show();
                                 uploadFotoMobil(task.getResult().getId());
-//                                finish();
                             }
                         });
                     } else {
