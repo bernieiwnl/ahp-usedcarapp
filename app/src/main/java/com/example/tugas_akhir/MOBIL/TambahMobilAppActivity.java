@@ -425,6 +425,7 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                                 fotoMobilAdapter.notifyDataSetChanged();
                                 Toast.makeText(TambahMobilAppActivity.this,
                                         "Upload foto mobil berhasil", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
                     } else {
@@ -469,7 +470,6 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                             public void onSuccess(Void unused) {
                                 Toast.makeText(getApplicationContext(), "Tambah Mobil Sukses", Toast.LENGTH_SHORT).show();
                                 uploadFotoMobil(task.getResult().getId());
-//                                finish();
                             }
                         });
                     } else {
