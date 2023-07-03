@@ -483,9 +483,13 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                 data++;
             }
 
-            if (data == fileUriList.size()) {
-                finish();
-            }
+            new android.os.Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 7000);
+
         } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
