@@ -199,14 +199,14 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
         checkRekomendasiMobil();
         rekomendasis.sort((s1, s2) ->
                 Double.compare(s2.getNilaiBobot(), s1.getNilaiBobot()));
-
-        Log.i("Array", rekomendasis.get(0).getNilaiBobot() + " Total Bobot mobil " + rekomendasis.get(0).getNewMobil().getNamaMerkMobil());
-        Log.i("Array", rekomendasis.get(0).getNilaiHarga() + " Bobot Harga mobil " + rekomendasis.get(0).getNewMobil().getNamaMerkMobil());
-        Log.i("Array", rekomendasis.get(0).getNilaiKelengkapan() + " Bobot Kelengkapan mobil " + rekomendasis.get(0).getNewMobil().getNamaMerkMobil());
-        Log.i("Array", "-------------------------------------------------------------------------------");
-        Log.i("Array", rekomendasis.get(1).getNilaiBobot() + " Total Bobot mobil " + rekomendasis.get(1).getNewMobil().getNamaMerkMobil());
-        Log.i("Array", rekomendasis.get(1).getNilaiHarga() + " Bobot Harga mobil " + rekomendasis.get(1).getNewMobil().getNamaMerkMobil());
-        Log.i("Array", rekomendasis.get(1).getNilaiKelengkapan() + " Bobot Kelengkapan mobil " + rekomendasis.get(1).getNewMobil().getNamaMerkMobil());
+//
+//        Log.i("Array", rekomendasis.get(0).getNilaiBobot() + " Total Bobot mobil " + rekomendasis.get(0).getNewMobil().getNamaMerkMobil());
+//        Log.i("Array", rekomendasis.get(0).getNilaiHarga() + " Bobot Harga mobil " + rekomendasis.get(0).getNewMobil().getNamaMerkMobil());
+//        Log.i("Array", rekomendasis.get(0).getNilaiKelengkapan() + " Bobot Kelengkapan mobil " + rekomendasis.get(0).getNewMobil().getNamaMerkMobil());
+//        Log.i("Array", "-------------------------------------------------------------------------------");
+//        Log.i("Array", rekomendasis.get(1).getNilaiBobot() + " Total Bobot mobil " + rekomendasis.get(1).getNewMobil().getNamaMerkMobil());
+//        Log.i("Array", rekomendasis.get(1).getNilaiHarga() + " Bobot Harga mobil " + rekomendasis.get(1).getNewMobil().getNamaMerkMobil());
+//        Log.i("Array", rekomendasis.get(1).getNilaiKelengkapan() + " Bobot Kelengkapan mobil " + rekomendasis.get(1).getNewMobil().getNamaMerkMobil());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DaftarRekomendasiMobilAppActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewRekomendasi.setLayoutManager(linearLayoutManager);
@@ -234,71 +234,85 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
             double nilaiTahun = 0.0;
 
             NewMobil dataMobil = alternatif;
+            Log.i("Array", dataMobil.getNamaMerkMobil() + "");
             for (PrefKriteria preferensi : prefKriterias) {
                 switch (preferensi.getNama_kriteria()) {
                     case "Harga": {
                         nilai += (matrixHarga[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Harga " + matrixHarga[index] + " * Bobot Krtieria Harga " + preferensi.getBobot_kriteria());
                         nilaiHarga = matrixHarga[index];
                         break;
                     }
                     case "Transmisi": {
                         nilai += (matrixTransmisi[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Transmisi " + matrixTransmisi[index] + " * Bobot Krtieria Transmisi " + preferensi.getBobot_kriteria());
                         nilaiTransmisi = matrixTransmisi[index];
                         break;
                     }
                     case "Kilometer": {
                         nilai += (matrixKilometer[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Kilometer " + matrixKilometer[index] + " * Bobot Krtieria Kilometer " + preferensi.getBobot_kriteria());
                         nilaiKilometer = matrixKilometer[index];
                         break;
                     }
                     case "Service Record": {
                         nilai += (matrixServiceRecord[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Service " + matrixServiceRecord[index] + " * Bobot Krtieria Service " + preferensi.getBobot_kriteria());
                         nilaiServiceRecord = matrixServiceRecord[index];
                         break;
                     }
                     case "Kondisi Mesin": {
                         nilai += (matrixKondisiMesin[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Kondisi Mesin " + matrixKondisiMesin[index] + " * Bobot Krtieria Kondisi Mesin " + preferensi.getBobot_kriteria());
                         nilaiKondisiMesin = matrixKondisiMesin[index];
                         break;
                     }
                     case "Tipe Mobil": {
                         nilai += (matrixTipeMobil[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Tipe Mobil " + matrixTipeMobil[index] + " * Bobot Krtieria Tipe Mobil " + preferensi.getBobot_kriteria());
                         nilaiTipeMobil = matrixTipeMobil[index];
                         break;
                     }
                     case "Kapasitas Mesin": {
                         nilai += (matrixKapasitasMesin[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Kapasitas Mesin " + matrixKapasitasMesin[index] + " * Bobot Krtieria Kapasitas Mesin " + preferensi.getBobot_kriteria());
                         nilaiKapasitasMesin = matrixKapasitasMesin[index];
                         break;
                     }
                     case "Kondisi Body": {
                         nilai += (matrixKondisiBody[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Kondisi Body " + matrixKondisiBody[index] + " * Bobot Krtieria Kondisi Body " + preferensi.getBobot_kriteria());
                         nilaiKondisiBody = matrixKondisiBody[index];
                         break;
                     }
                     case "Warna": {
                         nilai += (matrixWarna[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Warna Mobil " + matrixWarna[index] + " * Bobot Krtieria Warna Mobil " + preferensi.getBobot_kriteria());
                         nilaiWarna = matrixWarna[index];
                         break;
                     }
                     case "Kelengkapan": {
                         nilai += (matrixKelengkapan[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Kelengkapan Mobil " + matrixKelengkapan[index] + " * Bobot Krtieria Kelengkapan Mobil " + preferensi.getBobot_kriteria());
                         nilaiKelengkapan = matrixKelengkapan[index];
                         break;
                     }
                     case "Kondisi Interior": {
                         nilai += (matrixKondisiInterior[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Kondisi Interior Mobil " + matrixKondisiInterior[index] + " * Bobot Krtieria Kondisi Interior Mobil " + preferensi.getBobot_kriteria());
                         nilaiKondisiInterior = matrixKondisiInterior[index];
                         break;
                     }
                     default: {
                         nilai += (matrixTahun[index] * preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Tahun Mobil " + matrixTahun[index] + " * Bobot Krtieria Tahun Mobil " + preferensi.getBobot_kriteria());
                         nilaiTahun = matrixTahun[index];
                         break;
                     }
                 }
             }
             index++;
+            Log.i("Array", "==============================================================================");
             RekomendasiMobil rekomendasiMobil = new RekomendasiMobil(dataMobil, nilai, nilaiHarga, nilaiTransmisi, nilaiKilometer, nilaiServiceRecord, nilaiKondisiMesin, nilaiKapasitasMesin, nilaiKondisiBody, nilaiWarna, nilaiKelengkapan, nilaiKondisiInterior, nilaiTahun, nilaiTipeMobil);
             rekomendasis.add(rekomendasiMobil);
         }

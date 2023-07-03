@@ -131,7 +131,7 @@ public class SpkAhp {
             bobotWarna = 5.0;
         } else if (warnaMobil.equals("Hitam")) {
             bobotWarna = 4.0;
-        } else if (warnaMobil.equals("Abu-abu")) {
+        } else if (warnaMobil.equals("Abu - Abu")) {
             bobotWarna = 3.0;
         } else if (warnaMobil.equals("Silver")) {
             bobotWarna = 1.0;
