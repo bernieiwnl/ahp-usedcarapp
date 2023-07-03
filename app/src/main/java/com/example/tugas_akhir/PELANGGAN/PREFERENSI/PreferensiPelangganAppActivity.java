@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.tugas_akhir.ADAPTER.KriteriaMobilAdapter;
 import com.example.tugas_akhir.CLASS.Firestore;
 import com.example.tugas_akhir.CLASS.PrefKriteria;
+import com.example.tugas_akhir.PELANGGAN.TambahPelangganAppActivity;
 import com.example.tugas_akhir.R;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -144,6 +145,7 @@ public class PreferensiPelangganAppActivity extends AppCompatActivity implements
                     getCurrentPelangganID = tambahPelanggan(namaPelanggan, alamatPelanggan);
                     updateIdPelanggan(getCurrentPelangganID);
                     hitungBobotKriteria(getCurrentPelangganID, preferensis);
+
                 } catch (Exception e) {
                     Log.e("ErrorMsg", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -231,6 +233,7 @@ public class PreferensiPelangganAppActivity extends AppCompatActivity implements
             try {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Tambah Peferensi Sukses", Toast.LENGTH_SHORT).show();
+                    TambahPelangganAppActivity.getInstance().finish();
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Tambah Peferensi Gagal", Toast.LENGTH_SHORT).show();
