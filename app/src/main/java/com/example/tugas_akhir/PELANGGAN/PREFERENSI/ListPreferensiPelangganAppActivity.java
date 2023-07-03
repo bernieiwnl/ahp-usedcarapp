@@ -42,12 +42,13 @@ public class ListPreferensiPelangganAppActivity extends AppCompatActivity {
         try {
             //Data last Activity
             preferensiPelanggan = (ArrayList<String>) getIntent().getSerializableExtra("dataPreferensis");
-            Log.e("ErrorMsg", preferensiPelanggan.size() +"");
+            Log.e("ErrorMsg", preferensiPelanggan.size() + "");
             preferensis.add("Harga");
             preferensis.add("Transmisi");
             preferensis.add("Kilometer");
             preferensis.add("Service Record");
             preferensis.add("Kondisi Mesin");
+            preferensis.add("Tipe Mobil");
             preferensis.add("Kapasitas Mesin");
             preferensis.add("Kondisi Body");
             preferensis.add("Warna");
@@ -57,7 +58,7 @@ public class ListPreferensiPelangganAppActivity extends AppCompatActivity {
 
             Collections.sort(preferensis);
 
-            if(!preferensiPelanggan.isEmpty()){
+            if (!preferensiPelanggan.isEmpty()) {
                 for (String preferensiPel : preferensiPelanggan) {
                     preferensis.remove(preferensiPel);
                 }
