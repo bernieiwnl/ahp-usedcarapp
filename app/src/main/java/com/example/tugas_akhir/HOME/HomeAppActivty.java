@@ -96,6 +96,12 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btnPreferensi: {
                 try {
+                    //check jika user baru belum memili pelanggan
+                    if (TextUtils.isEmpty(getIdPelanggan)) {
+                        Toast.makeText(HomeAppActivty.this, "Pilih Pelanggan terlebih dahulu", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     Intent i = new Intent(HomeAppActivty.this, UbahPreferensiPelangganAppActivity.class);
                     i.putExtra("idPelanggan", getIdPelanggan);
                     startActivityForResult(i, 1);
@@ -116,6 +122,12 @@ public class HomeAppActivty extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.rekomendasiCardView: {
                 try {
+                    //check jika user baru belum memili pelanggan
+                    if (TextUtils.isEmpty(getIdPelanggan)) {
+                        Toast.makeText(HomeAppActivty.this, "Pilih Pelanggan terlebih dahulu", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     Intent intent = new Intent(HomeAppActivty.this, DaftarAlternatiflAppActivity.class);
                     intent.putExtra("idPelanggan", getIdPelanggan);
                     startActivityForResult(intent, 1);

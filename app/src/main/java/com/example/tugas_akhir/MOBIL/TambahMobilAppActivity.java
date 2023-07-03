@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -256,6 +257,52 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                 break;
             }
             case R.id.imageView_tambahMobil: {
+                if (TextUtils.isEmpty(txtInputNamaMerkMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Nama dan Merk Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtTipeMobil)) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Tipe Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtTransmisiMobil)) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Transmisi Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputTahunMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Tahun Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKilometerMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Kilomter Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputWarna.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Warna Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKapasitasMesinMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Kapasitas Mesin Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputHargaMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Harga Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputSejarahMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Sejarah Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtKondisiMesin)) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Kondisi Mesin Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtServiceMobil)) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Service Record Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtKondisiInterior)) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Kondisi Interior Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKeadaanMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Keadaan Body Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKelengkapanMobil.getText().toString().trim())) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Kelengkapan Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (fileImageList.isEmpty()) {
+                    Toast.makeText(TambahMobilAppActivity.this, "Foto Mobil harus ada minimal 1 Foto", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 simpanDataMobil();
                 break;
             }
@@ -435,7 +482,10 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                 });
                 data++;
             }
-            finish();
+
+            if (data == fileUriList.size()) {
+                finish();
+            }
         } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

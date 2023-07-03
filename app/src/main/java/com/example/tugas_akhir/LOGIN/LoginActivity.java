@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin.setOnClickListener(this);
         txtBuatAkun.setOnClickListener(this);
 
-        if(firebaseAuth.getCurrentUser() != null){
+        if (firebaseAuth.getCurrentUser() != null) {
             startActivity(new Intent(LoginActivity.this, HomeAppActivty.class));
             this.finish();
         }
@@ -60,25 +61,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnLogin:
-                login(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim());
+                // define input
+                String inputEmail = txtEmail.getText().toString().trim();
+                String inputPassword = txtPassword.getText().toString().trim();
+
+                // check if input is null than return a message
+                if (TextUtils.isEmpty(inputEmail)) {
+                    Toast.makeText(getApplicationContext(), "Email Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(inputPassword)) {
+                    Toast.makeText(getApplicationContext(), "Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                login(inputEmail, inputPassword);
                 break;
             case R.id.textBuatAkun:
                 startActivity(new Intent(LoginActivity.this, RegisterAppActivity.class));
                 break;
         }
     }
-    public void login(final String email, String password){
+
+    public void login(final String email, String password) {
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     startActivity(new Intent(LoginActivity.this, HomeAppActivty.class));
                     finish();
-                }else{
+                } else {
                     Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

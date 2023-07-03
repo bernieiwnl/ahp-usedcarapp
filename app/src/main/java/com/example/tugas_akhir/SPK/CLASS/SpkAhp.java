@@ -76,7 +76,7 @@ public class SpkAhp {
         } else if (harga <= 200999999 && harga >= 101000000) {
             bobotHarga = 5.0;
         } else {
-            bobotHarga = 6.0;
+            bobotHarga = 4.0;
         }
         return bobotHarga;
     }

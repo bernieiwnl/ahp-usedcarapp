@@ -23,10 +23,14 @@ public class TambahPelangganAppActivity extends AppCompatActivity implements Vie
     private Button btnTambahPreferensi;
     private TextInputEditText txtViewNamaPelanggan, txtViewAlamatPelanggan;
 
+    static TambahPelangganAppActivity tambahPelangganAppActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_pelanggan_app);
+
+        tambahPelangganAppActivity = this;
 
         //TextView
         txtViewNamaPelanggan = (TextInputEditText) findViewById(R.id.inputNamaUser);
@@ -75,5 +79,9 @@ public class TambahPelangganAppActivity extends AppCompatActivity implements Vie
                 }
             }
         }
+    }
+
+    public static TambahPelangganAppActivity getInstance() {
+        return tambahPelangganAppActivity;
     }
 }
