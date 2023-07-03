@@ -8,20 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.tugas_akhir.ADAPTER.DaftarRekomendasiMobilAdapter;
 import com.example.tugas_akhir.CLASS.PrefKriteria;
 import com.example.tugas_akhir.MOBIL.CLASS.NewMobil;
 import com.example.tugas_akhir.R;
-import com.example.tugas_akhir.REKOMENDASI.RekomendasiAlternatifActivity;
 import com.example.tugas_akhir.SPK.ADAPTER.DaftarRekomendasiAppAdapter;
 import com.example.tugas_akhir.SPK.CLASS.RekomendasiMobil;
 import com.example.tugas_akhir.SPK.CLASS.SpkAhp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Logger;
 
 public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +30,7 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
     private double[] matrixKilometer;
     private double[] matrixServiceRecord;
     private double[] matrixKondisiMesin;
+    private double[] matrixTipeMobil;
     private double[] matrixKapasitasMesin;
     private double[] matrixKondisiBody;
     private double[] matrixWarna;
@@ -112,8 +108,13 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
                         matrixKapasitasMesin[index] = kapasitasMesin;
                         break;
                     }
+                    case "Tipe Mobil": {
+                        double tipeMobil = spkAhp.bobotTipeMobil(alternatif.getTipeMobil());
+                        matrixTipeMobil[index] = tipeMobil;
+                        break;
+                    }
                     case "Kondisi Body": {
-                        double kondisiBody = spkAhp.bobotKondisiMesin(alternatif.getKeadaanMobil());
+                        double kondisiBody = spkAhp.bobotKeadaanBody(alternatif.getKeadaanMobil());
                         matrixKondisiBody[index] = kondisiBody;
                         break;
                     }
@@ -168,6 +169,10 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
                     matrixKapasitasMesin = spkAhp.hitungAHP(matrixKapasitasMesin);
                     break;
                 }
+                case "Tipe Mobil": {
+                    matrixTipeMobil = spkAhp.hitungAHP(matrixTipeMobil);
+                    break;
+                }
                 case "Kondisi Body": {
                     matrixKondisiBody = spkAhp.hitungAHP(matrixKondisiBody);
                     break;
@@ -216,6 +221,7 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
         for (NewMobil alternatif : mobils) {
             double nilai = 0.0;
             double nilaiHarga = 0.0;
+            double nilaiTipeMobil = 0.0;
             double nilaiTransmisi = 0.0;
             double nilaiKilometer = 0.0;
             double nilaiServiceRecord = 0.0;
@@ -255,6 +261,11 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
                         nilaiKondisiMesin = matrixKondisiMesin[index];
                         break;
                     }
+                    case "Tipe Mobil": {
+                        nilai += (matrixTipeMobil[index] * preferensi.getBobot_kriteria());
+                        nilaiTipeMobil = matrixTipeMobil[index];
+                        break;
+                    }
                     case "Kapasitas Mesin": {
                         nilai += (matrixKapasitasMesin[index] * preferensi.getBobot_kriteria());
                         nilaiKapasitasMesin = matrixKapasitasMesin[index];
@@ -288,7 +299,7 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
                 }
             }
             index++;
-            RekomendasiMobil rekomendasiMobil = new RekomendasiMobil(dataMobil, nilai, nilaiHarga, nilaiTransmisi, nilaiKilometer, nilaiServiceRecord, nilaiKondisiMesin, nilaiKapasitasMesin, nilaiKondisiBody, nilaiWarna, nilaiKelengkapan, nilaiKondisiInterior, nilaiTahun);
+            RekomendasiMobil rekomendasiMobil = new RekomendasiMobil(dataMobil, nilai, nilaiHarga, nilaiTransmisi, nilaiKilometer, nilaiServiceRecord, nilaiKondisiMesin, nilaiKapasitasMesin, nilaiKondisiBody, nilaiWarna, nilaiKelengkapan, nilaiKondisiInterior, nilaiTahun, nilaiTipeMobil);
             rekomendasis.add(rekomendasiMobil);
         }
     }

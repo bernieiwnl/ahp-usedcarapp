@@ -17,9 +17,11 @@ public class RekomendasiMobil {
     private double nilaiKelengkapan;
     private double nilaiKondisiInterior;
     private double nilaiTahun;
+    private double nilaiTipeMobil;
 
 
-    public RekomendasiMobil(NewMobil newMobil, double nilaiBobot, double nilaiHarga, double nilaiTransmisi, double nilaiKilometer, double nilaiServiceRecord, double nilaiKondisiMesin, double nilaiKapasitasMesin, double nilaiKondisiBody, double nilaiWarna, double nilaiKelengkapan, double nilaiKondisiInterior, double nilaiTahun) {
+    public RekomendasiMobil(NewMobil newMobil, double nilaiBobot, double nilaiHarga, double nilaiTransmisi, double nilaiKilometer, double nilaiServiceRecord, double nilaiKondisiMesin, double nilaiKapasitasMesin, double nilaiKondisiBody, double nilaiWarna, double nilaiKelengkapan, double nilaiKondisiInterior, double nilaiTahun, double nilaiTipeMobil) {
+        this.setNilaiTipeMobil(nilaiTipeMobil);
         this.setNewMobil(newMobil);
         this.setNilaiBobot(nilaiBobot);
         this.setNilaiHarga(nilaiHarga);
@@ -137,5 +139,13 @@ public class RekomendasiMobil {
 
     public void setNilaiTahun(double nilaiTahun) {
         this.nilaiTahun = nilaiTahun;
+    }
+
+    public double getNilaiTipeMobil() {
+        return nilaiTipeMobil;
+    }
+
+    public void setNilaiTipeMobil(double nilaiTipeMobil) {
+        this.nilaiTipeMobil = nilaiTipeMobil;
     }
 }
