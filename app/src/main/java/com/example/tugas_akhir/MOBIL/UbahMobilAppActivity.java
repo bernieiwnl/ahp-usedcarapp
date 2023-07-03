@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -271,6 +272,53 @@ public class UbahMobilAppActivity extends AppCompatActivity implements View.OnCl
                 break;
             }
             case R.id.imageView_tambahMobil: {
+                if (TextUtils.isEmpty(txtInputNamaMerkMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Nama dan Merk Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtTipeMobil)) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Tipe Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtTransmisiMobil)) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Transmisi Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputTahunMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Tahun Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKilometerMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Kilomter Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputWarna.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Warna Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKapasitasMesinMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Kapasitas Mesin Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputHargaMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Harga Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputSejarahMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Sejarah Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtKondisiMesin)) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Kondisi Mesin Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtServiceMobil)) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Service Record Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtKondisiInterior)) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Kondisi Interior Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKeadaanMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Keadaan Body Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(txtInputKelengkapanMobil.getText().toString().trim())) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Kelengkapan Mobil harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (fileImageList.isEmpty()) {
+                    Toast.makeText(UbahMobilAppActivity.this, "Foto Mobil harus ada minimal 1 Foto", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 updateDataMobil(RESULT_ID_MOBIL);
                 break;
             }
