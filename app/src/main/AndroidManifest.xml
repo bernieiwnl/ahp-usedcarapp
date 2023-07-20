@@ -106,7 +106,6 @@
         <activity android:name=".ADDATA_MOBIL.AddDataMobilActivity" />
         <activity android:name=".PROFILE.DaftarMobilUserActivity" />
         <activity android:name=".PROFILE.UbahProfileActivity" />
-        <activity android:name=".HOME.HomeActivity" />
         <activity android:name=".REGISTER.RegisterActivity" />
         <activity android:name=".LOGIN.LoginActivity">
             <intent-filter>

@@ -239,7 +239,7 @@ public class DaftarRekomendasiMobilAppActivity extends AppCompatActivity impleme
                 switch (preferensi.getNama_kriteria()) {
                     case "Harga": {
                         nilai += (matrixHarga[index] * preferensi.getBobot_kriteria());
-                        Log.i("Array", "Bobot Alternatif Harga " + matrixHarga[index] + " * Bobot Krtieria Harga " + preferensi.getBobot_kriteria());
+                        Log.i("Array", "Bobot Alternatif Harga " + matrixHarga[index] + " * Bobot Krtieria Harga " + preferensi.getBobot_kriteria() );
                         nilaiHarga = matrixHarga[index];
                         break;
                     }

@@ -18,13 +18,9 @@ import com.example.tugas_akhir.CLASS.PrefKriteria;
 import com.example.tugas_akhir.CLASS.Preferensi;
 import com.example.tugas_akhir.MOBIL.CLASS.NewMobil;
 import com.example.tugas_akhir.R;
-import com.example.tugas_akhir.REKOMENDASI.DaftarAlternatifActivity;
-import com.example.tugas_akhir.REKOMENDASI.PemilihanAlternatifActivity;
 import com.example.tugas_akhir.SPK.ADAPTER.DaftarAlternatifAppAdapter;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;

@@ -13,11 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tugas_akhir.HOME.HomeActivity;
 import com.example.tugas_akhir.HOME.HomeAppActivty;
-import com.example.tugas_akhir.MainActivity;
 import com.example.tugas_akhir.R;
-import com.example.tugas_akhir.REGISTER.RegisterActivity;
 import com.example.tugas_akhir.REGISTER.RegisterAppActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
