@@ -25,8 +25,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.ADAPTER.FotoMobilAdapter;
-import com.example.tugas_akhir.ADDATA_MOBIL.AddDataMobilActivity;
-import com.example.tugas_akhir.MOBIL.MASTER.ADAPTER.KeadaanBodyAppAdapter;
 import com.example.tugas_akhir.MOBIL.MASTER.ListKeadaanBodyAppActivity;
 import com.example.tugas_akhir.MOBIL.MASTER.ListKelengkapanAppActivity;
 import com.example.tugas_akhir.MOBIL.MASTER.ListWarnaAppActivity;
@@ -482,7 +480,6 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                 });
                 data++;
             }
-
             new android.os.Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -514,7 +511,6 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
             mobil.put("kondisiInteriorMobil", txtKondisiInterior);
             mobil.put("keadaanMobil", txtInputKeadaanMobil.getText().toString().trim());
             mobil.put("kelengkapanMobil", txtInputKelengkapanMobil.getText().toString().trim());
-
             firebaseFirestore.collection("mobil").add(mobil).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -529,11 +525,8 @@ public class TambahMobilAppActivity extends AppCompatActivity implements View.On
                     } else {
                         Toast.makeText(getApplicationContext(), "Tambah Mobil Gagal", Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
             });
-
         } catch (Exception e) {
             Log.e("ErrorMsg", e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
