@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tugas_akhir.ADAPTER.FotoMobilAdapter;
+import com.example.tugas_akhir.ADAPTER.ImageSliderAdapter;
 import com.example.tugas_akhir.MOBIL.CLASS.NewMobil;
 import com.example.tugas_akhir.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +30,7 @@ public class DetailMobilAppActivity extends AppCompatActivity {
 
     private TextView textViewInputNamaMobil, textViewInputTipeMobil, textViewInputTransmisiMobil, textViewInputTahunMobil, textViewInputKilometerMobil, textViewInputWarnaMobil, textViewInputKapasitasMesinMobil, textViewInputHargaMobil, textViewInputKondisiMesinMobil, textViewInputServiceRecordMobil, textViewInputKondisiInteriorMobil, textViewInputKeadaanBodyMobil, textViewInputKelengkapanMobil;
     private SliderView sliderViewImageMobil;
-    private FotoMobilAdapter fotoMobilAdapter;
+    private ImageSliderAdapter imageSliderAdapter;
     private ArrayList<String> fotoMobils;
     private ImageView imageViewBack;
     private String GET_ID_MOBIL;
@@ -82,6 +83,12 @@ public class DetailMobilAppActivity extends AppCompatActivity {
                     return;
                 }
                 NewMobil newMobil = documentSnapshot.toObject(NewMobil.class);
+                fotoMobils.clear();
+                fotoMobils.addAll(newMobil.getFotoMobil());
+                imageSliderAdapter = new ImageSliderAdapter(DetailMobilAppActivity.this, fotoMobils);
+                sliderViewImageMobil.setSliderAdapter(imageSliderAdapter);
+
+
                 textViewInputNamaMobil.setText(newMobil.getNamaMerkMobil());
                 textViewInputTipeMobil.setText(newMobil.getTipeMobil());
                 textViewInputTransmisiMobil.setText(newMobil.getTransmisiMobil());
