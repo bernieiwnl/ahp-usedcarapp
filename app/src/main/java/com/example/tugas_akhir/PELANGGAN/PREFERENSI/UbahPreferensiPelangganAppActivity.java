@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.example.tugas_akhir.ADAPTER.KriteriaMobilAdapter;
 import com.example.tugas_akhir.CLASS.PrefKriteria;
 import com.example.tugas_akhir.CLASS.Preferensi;
-import com.example.tugas_akhir.PREFERENSI.UbahKriteriaActivity;
 import com.example.tugas_akhir.R;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
