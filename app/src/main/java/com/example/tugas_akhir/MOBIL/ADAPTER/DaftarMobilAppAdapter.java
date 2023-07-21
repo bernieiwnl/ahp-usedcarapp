@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tugas_akhir.ADAPTER.ImageSliderAdapter;
 import com.example.tugas_akhir.MOBIL.CLASS.NewMobil;
+import com.example.tugas_akhir.MOBIL.DetailMobilAppActivity;
 import com.example.tugas_akhir.MOBIL.UbahMobilAppActivity;
 import com.example.tugas_akhir.PELANGGAN.UbahPelangganAppActivity;
 import com.example.tugas_akhir.R;
@@ -65,7 +66,10 @@ public class DaftarMobilAppAdapter extends RecyclerView.Adapter<DaftarMobilAppAd
         });
 
         holder.buttonDetailDataMobil.setOnClickListener(v -> {
-
+            Intent i = new Intent(context, DetailMobilAppActivity.class);
+            i.putExtra("idMobil", mobils.get(position).getIdMobil());
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.getApplicationContext().startActivity(i);
         });
     }
 
