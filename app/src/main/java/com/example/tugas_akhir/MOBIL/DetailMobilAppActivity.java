@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +27,9 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DetailMobilAppActivity extends AppCompatActivity {
+public class DetailMobilAppActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textViewInputNamaMobil, textViewInputTipeMobil, textViewInputTransmisiMobil, textViewInputTahunMobil, textViewInputKilometerMobil, textViewInputWarnaMobil, textViewInputKapasitasMesinMobil, textViewInputHargaMobil, textViewInputKondisiMesinMobil, textViewInputServiceRecordMobil, textViewInputKondisiInteriorMobil, textViewInputKeadaanBodyMobil, textViewInputKelengkapanMobil;
+    private TextView textViewInputNamaMobil, textViewInputTipeMobil, textViewInputTransmisiMobil, textViewInputTahunMobil, textViewInputKilometerMobil, textViewInputWarnaMobil, textViewInputKapasitasMesinMobil, textViewInputHargaMobil, textViewInputKondisiMesinMobil, textViewInputServiceRecordMobil, textViewInputKondisiInteriorMobil, textViewInputKeadaanBodyMobil, textViewInputKelengkapanMobil, textViewInputSejarahMobil;
     private SliderView sliderViewImageMobil;
     private ImageSliderAdapter imageSliderAdapter;
     private ArrayList<String> fotoMobils;
@@ -42,6 +43,7 @@ public class DetailMobilAppActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_mobil_app);
 
 //        TextView
+        textViewInputSejarahMobil = (TextView) findViewById(R.id.textViewSejarahMobil);
         textViewInputNamaMobil = (TextView) findViewById(R.id.textViewNamaMerkMobil);
         textViewInputTipeMobil = (TextView) findViewById(R.id.textViewTipeMobil);
         textViewInputTransmisiMobil = (TextView) findViewById(R.id.textViewTransmisiMobil);
@@ -70,6 +72,10 @@ public class DetailMobilAppActivity extends AppCompatActivity {
 
 //        Method get data mobil
         fetchData(GET_ID_MOBIL);
+
+//        Set Onclick Listener
+        imageViewBack.setOnClickListener(this);
+
     }
 
     private void fetchData(String GET_ID_MOBIL) {
@@ -88,7 +94,7 @@ public class DetailMobilAppActivity extends AppCompatActivity {
                 imageSliderAdapter = new ImageSliderAdapter(DetailMobilAppActivity.this, fotoMobils);
                 sliderViewImageMobil.setSliderAdapter(imageSliderAdapter);
 
-
+                textViewInputSejarahMobil.setText(newMobil.getSejarahMobil());
                 textViewInputNamaMobil.setText(newMobil.getNamaMerkMobil());
                 textViewInputTipeMobil.setText(newMobil.getTipeMobil());
                 textViewInputTransmisiMobil.setText(newMobil.getTransmisiMobil());
@@ -113,5 +119,14 @@ public class DetailMobilAppActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imageView_back:
+                finish();
+                break;
+        }
     }
 }
